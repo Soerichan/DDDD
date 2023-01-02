@@ -9,6 +9,15 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float m_fMoveSpeed;
+
+    [SerializeField]
+    private float m_fGlideSpeed;
+
+    [SerializeField]
+    private float m_fGlideTime;
+
+    private bool m_bGliding;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +52,12 @@ public class PlayerController : MonoBehaviour
             m_animator.SetBool("Move", false);
         }
     }
+
+    public void Glide()
+    {
+     
+    }
+
 
     private void Rotate()
     {
