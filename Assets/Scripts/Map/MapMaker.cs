@@ -35,18 +35,19 @@ public class MapMaker : MonoBehaviour
 
             for (int i = 0; i < 5; i++)
             {
-                int randomMapping = UnityEngine.Random.Range(-1, 1);
+                int randomMapping = UnityEngine.Random.Range(-1, 2);
 
                 if (MapArray[i,j-1]==1)
                 {
+                    
                     int MappingResult = i + randomMapping;
 
-                    if (MappingResult < 0)
+                    if (MappingResult <= 0)
                     {
                         MappingResult = 0;
                         MapArray[MappingResult+1, j] = 1;
                     }
-                    if(MappingResult>4)
+                    if(MappingResult>=4)
                     {
                         MappingResult = 4;
                         MapArray[MappingResult-1, j] = 1;

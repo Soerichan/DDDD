@@ -44,7 +44,7 @@ public class MapGrid : MonoBehaviour
                     continue;
                 }
 
-                int randomRoom = UnityEngine.Random.Range(1, 6);
+                int randomRoom = UnityEngine.Random.Range(1, 7);
 
                 switch (randomRoom)
                 {
