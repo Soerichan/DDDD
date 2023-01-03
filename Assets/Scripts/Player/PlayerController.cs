@@ -2,32 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+enum PlayerState { Idle, Glide, Die }
+
 public class PlayerController : MonoBehaviour
 {
     private CharacterController m_controller;
     private Animator m_animator;
 
     [SerializeField]
-    private float m_fMoveSpeed;
+    private float m_fMoveDefaultSpeed;
 
     [SerializeField]
-    private float m_fGlideSpeed;
+    private float m_fGlideDefaultSpeed;
 
     [SerializeField]
-    private float m_fGlideTime;
+    private float m_fGlideDefaultTimer;
 
-    private bool m_bGliding;
+    public float m_fMoveSpeed;
+    public float m_fGlideSpeed;
+    public float m_fGlideTimer;
+
+    public bool m_bGliding;
+
+    private float m_fGlidingTimeChecker;
+
+    PlayerState State;
 
     // Start is called before the first frame update
     void Start()
     {
         m_controller = GetComponent<CharacterController>(); 
         m_animator = GetComponent<Animator>();
+        m_fMoveSpeed = m_fMoveDefaultSpeed;
+        m_fGlideSpeed=m_fGlideDefaultSpeed;
+        m_fGlideTimer= m_fGlideDefaultTimer;
+        m_fGlidingTimeChecker = m_fGlideDefaultTimer;
+
+        m_bGliding= false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Glide();
         //Rotate();
     }
 
@@ -55,7 +72,28 @@ public class PlayerController : MonoBehaviour
 
     public void Glide()
     {
-     
+        if(true==m_bGliding)
+        {
+            transform.Translate(0f, 0f, m_fGlideSpeed * Time.deltaTime, Space.Self);
+            m_animator.SetBool("Glide", true);
+
+            m_fGlidingTimeChecker-=Time.deltaTime;
+
+            if(m_fGlidingTimeChecker <= 0)
+            {
+                m_bGliding = false;
+                m_fGlidingTimeChecker = m_fGlideTimer;
+            }
+            Debug.Log("gliding");
+            State = PlayerState.Glide;
+        }
+        else
+        {
+            m_animator.SetBool("Glide", false);
+            State = PlayerState.Idle;
+        }
+     // m_bGliding= true;
+      //  transform.Translate(0f, 0f, m_fGlideSpeed*Time.deltaTime, Space.Self);
     }
 
 
