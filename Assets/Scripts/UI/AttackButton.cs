@@ -19,11 +19,11 @@ public class AttackButton : MonoBehaviour
 
     private bool m_bCoolDown;
 
-    private Button m_Button;
+   public Button m_Button;
 
     private void Start()
     {
-        m_Button = GetComponent<Button>();
+       // m_Button = GetComponent<Button>();
         m_fGlideCoolTime = m_fGlideDefaultCoolTime;
         m_fLastGlideTime = 0f;
         
@@ -55,6 +55,7 @@ public class AttackButton : MonoBehaviour
         m_playerController.m_bGliding = true;
         m_bCoolDown = false;
         m_Button.interactable = false;
+        
         Debug.Log("Click3");
 
        // m_fLastGlideTime = now;
@@ -63,30 +64,37 @@ public class AttackButton : MonoBehaviour
     
     private void CoolDownCheck()
     {
-        var now = Time.time;
 
-        if(m_fGlideCoolTime<now-m_fLastGlideTime)
+        if(false==m_bCoolDown)
         {
-            m_bCoolDown = true;
+            m_fGlideCoolTimeChecker -= Time.deltaTime;
+
+            if (m_fGlideCoolTimeChecker <= 0)
+            {
+
+                m_bCoolDown = true;
+                m_fGlideCoolTimeChecker = m_fGlideCoolTime;
+                m_Button.interactable = true;
+            }
         }
-        m_Button.interactable = true;
+
     }
 
 
 
-    //private void GlidingCheck()
-    //{
+    private void GlidingCheck()
+    {
 
-    //    if (true == m_playerController.m_bGliding)
-    //    {
-    //        m_fGlideCoolTimeChecker -= Time.deltaTime;
+        if (true == m_playerController.m_bGliding)
+        {
+            m_fGlideCoolTimeChecker -= Time.deltaTime;
 
-    //        if (m_fGlideCoolTimeChecker <= 0)
-    //        {
-    //            m_playerController.m_bGliding = false;
+            if (m_fGlideCoolTimeChecker <= 0)
+            {
+                m_playerController.m_bGliding = false;
 
-    //            m_fGlideCoolTimeChecker = m_fGlideCoolTime;
-    //        }
-    //    }
-    //}
+                m_fGlideCoolTimeChecker = m_fGlideCoolTime;
+            }
+        }
+    }
 }
