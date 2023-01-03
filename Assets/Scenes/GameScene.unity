@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2477607, g: 0.36364248, b: 0.44277075, a: 1}
+  m_IndirectSpecularColor: {r: 0.24765554, g: 0.36358643, b: 0.44259873, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -228,6 +228,83 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3497560186732343195, guid: dceee1964c43f2847b38a8b91650dc76, type: 3}
   m_PrefabInstance: {fileID: 1174596909}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &808363829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6480851542216520087, guid: dceee1964c43f2847b38a8b91650dc76, type: 3}
+  m_PrefabInstance: {fileID: 1174596909}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &808363830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808363829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.5372549}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2105918941}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 808363831}
+        m_TargetAssemblyTypeName: AttackButton, Assembly-CSharp
+        m_MethodName: ClickAttackButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &808363831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808363829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b10df0998736674fbbe4b45ff162414, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_playerController: {fileID: 1990848689}
+  m_fGlideDefaultCoolTime: 5
+  m_fGlideCoolTime: 0
+  m_Button: {fileID: 808363830}
 --- !u!1 &866621330
 GameObject:
   m_ObjectHideFlags: 3
@@ -1052,9 +1129,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab90202e432cd34bb46294b4f4a0974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fMoveSpeed: 20
+  m_fMoveDefaultSpeed: 20
+  m_fGlideDefaultSpeed: 80
+  m_fGlideDefaultTimer: 0.5
+  m_fMoveSpeed: 0
   m_fGlideSpeed: 0
-  m_fGlideTime: 0
+  m_fGlideTimer: 0
+  m_bGliding: 0
 --- !u!95 &1990848690
 Animator:
   serializedVersion: 4
@@ -1075,3 +1156,14 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2105918941 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1855040962190953932, guid: dceee1964c43f2847b38a8b91650dc76, type: 3}
+  m_PrefabInstance: {fileID: 1174596909}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

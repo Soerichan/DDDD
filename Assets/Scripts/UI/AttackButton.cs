@@ -82,19 +82,19 @@ public class AttackButton : MonoBehaviour
 
 
 
-    private void GlidingCheck()
-    {
+    //private void GlidingCheck()
+    //{
 
-        if (true == m_playerController.m_bGliding)
-        {
-            m_fGlideCoolTimeChecker -= Time.deltaTime;
+    //    if (true == m_playerController.m_bGliding)
+    //    {
+    //        m_fGlideCoolTimeChecker -= Time.deltaTime;
 
-            if (m_fGlideCoolTimeChecker <= 0)
-            {
-                m_playerController.m_bGliding = false;
+    //        if (m_fGlideCoolTimeChecker <= 0)
+    //        {
+    //            m_playerController.m_bGliding = false;
 
-                m_fGlideCoolTimeChecker = m_fGlideCoolTime;
-            }
-        }
-    }
+    //            m_fGlideCoolTimeChecker = m_fGlideCoolTime;
+    //        }
+    //    }
+    //}
 }
