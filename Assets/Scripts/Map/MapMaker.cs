@@ -7,20 +7,15 @@ public class MapMaker : MonoBehaviour
 {
     public int[,] MapArray = new int[5, 10];
     bool IsFrontCompartmentWithi;
-   
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         MapMake();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 
+   
     private void MapMake()
     {
         MapArray[1, 0] = 1;

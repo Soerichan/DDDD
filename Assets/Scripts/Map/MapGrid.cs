@@ -37,8 +37,12 @@ public class MapGrid : MonoBehaviour
     [SerializeField]
     private float placeSize;
 
+    public MapRoomButton[,] MapRoomButtonArray = new MapRoomButton[5, 10];
+    public MapRoomButton IsCliked;
+
     private void Start()
     {
+        
         for (int y = 0; y < gridSize.y; y++)
         {
             if (y == gridSize.y - 1)
@@ -126,6 +130,9 @@ public class MapGrid : MonoBehaviour
                 {
                     MapRoomButton buttonPlace = Instantiate(MapButton07, transform);
                     buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                    buttonPlace.x = x;
+                    buttonPlace.y = y;
+                    MapRoomButtonArray[2, 9] = buttonPlace;
                     continue;
                 }
 
@@ -138,18 +145,27 @@ public class MapGrid : MonoBehaviour
                         {
                             MapRoomButton buttonPlace = Instantiate(MapButton01, transform);
                             buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                            buttonPlace.x = x;
+                            buttonPlace.y = y;
+                            MapRoomButtonArray[x, y] = buttonPlace;
                             break;
                         }
                     case 2:
                         {
                             MapRoomButton buttonPlace = Instantiate(MapButton02, transform);
                             buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                            buttonPlace.x = x;
+                            buttonPlace.y = y;
+                            MapRoomButtonArray[x, y] = buttonPlace;
                             break;
                         }
                     case 3:
                         {
                             MapRoomButton buttonPlace = Instantiate(MapButton03, transform);
                             buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                            buttonPlace.x = x;
+                            buttonPlace.y = y;
+                            MapRoomButtonArray[x, y] = buttonPlace;
                             break;
                         }
                 
@@ -157,18 +173,27 @@ public class MapGrid : MonoBehaviour
                         {
                             MapRoomButton buttonPlace = Instantiate(MapButton04, transform);
                             buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                            buttonPlace.x = x;
+                            buttonPlace.y = y;
+                            MapRoomButtonArray[x, y] = buttonPlace;
                             break;
                         }
                     case 5:
                         {
                             MapRoomButton buttonPlace = Instantiate(MapButton05, transform);
                             buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                            buttonPlace.x = x;
+                            buttonPlace.y = y;
+                            MapRoomButtonArray[x, y] = buttonPlace;
                             break;
                         }
                     case 6:
                         {
                             MapRoomButton buttonPlace = Instantiate(MapButton06, transform);
                             buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                            buttonPlace.x = x;
+                            buttonPlace.y = y;
+                            MapRoomButtonArray[x, y] = buttonPlace;
                             break;
                         }
                     default:
@@ -198,4 +223,39 @@ public class MapGrid : MonoBehaviour
             }
         }
     }
+
+    public void NarrowDown()
+    {
+        int Killx = IsCliked.x;
+        int Killy = IsCliked.y;
+
+        for(int y = 0; y < gridSize.y; y++)
+        {
+            for(int x = 0; x < gridSize.x; x++)
+            {
+                if (y == Killy)
+                {
+                    if (MapRoomButtonArray[x, y] != null)
+                    {
+                        MapRoomButtonArray[x, y].RoomButtonDisable();
+                    }
+                }
+
+           
+                if (y == Killy+1)
+                {
+                   if(!(x>=Killx-1&&x<=Killx+1))
+                    {
+                        if (MapRoomButtonArray[x, y] != null)
+                        {
+                            MapRoomButtonArray[x, y].RoomButtonDisable();
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+
+
 }
