@@ -534,6 +534,11 @@ MonoBehaviour:
   MapButton05: {fileID: 7314170795000488627, guid: 1528136f92978934f8dae6314eeb2872, type: 3}
   MapButton06: {fileID: 3385203329515151644, guid: 1e61f5d933e023a46bea313b3eb3efc2, type: 3}
   MapButton07: {fileID: 1401993370659151088, guid: 457e21d95188cf140a6492e902a615cd, type: 3}
+  Road01: {fileID: 8242768048069355103, guid: 4aea63d4084e789418eb1e0d2f475761, type: 3}
+  Road02: {fileID: 3943632655376434867, guid: 95a5039279ce1514ca1afb2c5c2d95c0, type: 3}
+  Road03: {fileID: 4384100571877875076, guid: a1085c0a4ba25854fbd8c5fdca988058, type: 3}
+  Road04: {fileID: 12681849975086332, guid: e372a43da5eed85449d01d7f7843acc1, type: 3}
+  Road05: {fileID: 434189893903422371, guid: deb7983d590210944a1c2c8bd8aa58d5, type: 3}
   mapMaker: {fileID: 402017623}
   gridSize: {x: 5, y: 10}
   placeSize: 350
@@ -1203,6 +1208,14 @@ PrefabInstance:
     - target: {fileID: 2143574636969952662, guid: 84b6886a50ad26d408cd7aeae195cafb, type: 3}
       propertyPath: m_fontColorGradient.topLeft.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2143574636986444575, guid: 84b6886a50ad26d408cd7aeae195cafb, type: 3}
+      propertyPath: m_Size
+      value: 0.2913727
+      objectReference: {fileID: 0}
+    - target: {fileID: 2143574636986444575, guid: 84b6886a50ad26d408cd7aeae195cafb, type: 3}
+      propertyPath: m_Value
+      value: -0.00000079007106
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84b6886a50ad26d408cd7aeae195cafb, type: 3}
