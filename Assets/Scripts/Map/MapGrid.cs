@@ -30,6 +30,9 @@ public class MapGrid : MonoBehaviour
     [SerializeField]
     private MapRoad Road05;
 
+    [SerializeField]
+    private GameObject ShinyEffect;
+
     public MapMaker mapMaker;
 
     [SerializeField]
@@ -38,11 +41,15 @@ public class MapGrid : MonoBehaviour
     private float placeSize;
 
     public MapRoomButton[,] MapRoomButtonArray = new MapRoomButton[5, 10];
+    public GameObject[,] ShinyEffecrtArray= new GameObject[5, 10];
     public MapRoomButton IsCliked;
+
+    public int m_iCleardStage;
 
     private void Start()
     {
-        
+        m_iCleardStage = 0;
+
         for (int y = 0; y < gridSize.y; y++)
         {
             if (y == gridSize.y - 1)
@@ -115,7 +122,7 @@ public class MapGrid : MonoBehaviour
         }
 
 
-                for (int y = 0; y < gridSize.y; y++)
+        for (int y = 0; y < gridSize.y; y++)
         {
             for (int x = 0; x < gridSize.x; x++)
             {
@@ -133,6 +140,12 @@ public class MapGrid : MonoBehaviour
                     buttonPlace.x = x;
                     buttonPlace.y = y;
                     MapRoomButtonArray[2, 9] = buttonPlace;
+
+                    GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                    shinyPlace.transform.localPosition= new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                    ShinyEffecrtArray[2, 9] = shinyPlace;
+                    shinyPlace.SetActive(false);
+
                     continue;
                 }
 
@@ -148,6 +161,12 @@ public class MapGrid : MonoBehaviour
                             buttonPlace.x = x;
                             buttonPlace.y = y;
                             MapRoomButtonArray[x, y] = buttonPlace;
+
+                            GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                            shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                            ShinyEffecrtArray[x, y] = shinyPlace;
+                            shinyPlace.SetActive(false);
+
                             break;
                         }
                     case 2:
@@ -157,6 +176,12 @@ public class MapGrid : MonoBehaviour
                             buttonPlace.x = x;
                             buttonPlace.y = y;
                             MapRoomButtonArray[x, y] = buttonPlace;
+
+                            GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                            shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                            ShinyEffecrtArray[x, y] = shinyPlace;
+                            shinyPlace.SetActive(false);
+
                             break;
                         }
                     case 3:
@@ -166,6 +191,12 @@ public class MapGrid : MonoBehaviour
                             buttonPlace.x = x;
                             buttonPlace.y = y;
                             MapRoomButtonArray[x, y] = buttonPlace;
+
+                            GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                            shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                            ShinyEffecrtArray[x, y] = shinyPlace;
+                            shinyPlace.SetActive(false);
+
                             break;
                         }
                 
@@ -176,6 +207,12 @@ public class MapGrid : MonoBehaviour
                             buttonPlace.x = x;
                             buttonPlace.y = y;
                             MapRoomButtonArray[x, y] = buttonPlace;
+
+                            GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                            shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                            ShinyEffecrtArray[x, y] = shinyPlace;
+                            shinyPlace.SetActive(false);
+
                             break;
                         }
                     case 5:
@@ -185,6 +222,12 @@ public class MapGrid : MonoBehaviour
                             buttonPlace.x = x;
                             buttonPlace.y = y;
                             MapRoomButtonArray[x, y] = buttonPlace;
+
+                            GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                            shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                            ShinyEffecrtArray[x, y] = shinyPlace;
+                            shinyPlace.SetActive(false);
+
                             break;
                         }
                     case 6:
@@ -194,19 +237,29 @@ public class MapGrid : MonoBehaviour
                             buttonPlace.x = x;
                             buttonPlace.y = y;
                             MapRoomButtonArray[x, y] = buttonPlace;
+
+                            GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                            shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                            ShinyEffecrtArray[x, y] = shinyPlace;
+                            shinyPlace.SetActive(false);
+
                             break;
                         }
                     default:
                         continue;
                 }
 
-              
 
+
+                
                 //  mapMaker.
                 //  MapRoomButton buttonPlace = Instantiate(MapButton, transform);
                 //buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize,(y + 0.5f) * placeSize);
             }
         }
+        ShinyEffecrtArray[1, 0].SetActive(true);
+        ShinyEffecrtArray[2, 0].SetActive(true);
+        ShinyEffecrtArray[3, 0].SetActive(true);
     }
 
     private void OnDrawGizmos()
@@ -229,6 +282,11 @@ public class MapGrid : MonoBehaviour
         int Killx = IsCliked.x;
         int Killy = IsCliked.y;
 
+        if(Killy==gridSize.y)
+        {
+
+        }
+
         for(int y = 0; y < gridSize.y; y++)
         {
             for(int x = 0; x < gridSize.x; x++)
@@ -238,6 +296,7 @@ public class MapGrid : MonoBehaviour
                     if (MapRoomButtonArray[x, y] != null)
                     {
                         MapRoomButtonArray[x, y].RoomButtonDisable();
+                        ShinyEffecrtArray[x,y].SetActive(false);
                     }
                 }
 
@@ -249,13 +308,27 @@ public class MapGrid : MonoBehaviour
                         if (MapRoomButtonArray[x, y] != null)
                         {
                             MapRoomButtonArray[x, y].RoomButtonDisable();
+                            ShinyEffecrtArray[x, y].SetActive(false);
+                        }
+                    }
+                   else
+                    {
+                        if (MapRoomButtonArray[x, y] != null)
+                        {
+                            
+                            ShinyEffecrtArray[x, y].SetActive(true);
                         }
                     }
                 }
+
+                
                 
             }
         }
     }
+
+
+
 
 
 }

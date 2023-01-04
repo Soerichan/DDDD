@@ -149,6 +149,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 0
+  m_shiny: {fileID: 26247829969169322, guid: 5e874f8e48c4a1742ae52c6a779293e5, type: 3}
+  m_bEable: 0
 --- !u!1 &8917729278764552238
 GameObject:
   m_ObjectHideFlags: 0

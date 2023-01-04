@@ -1053,6 +1053,10 @@ PrefabInstance:
       propertyPath: mapMaker
       value: 
       objectReference: {fileID: 402017623}
+    - target: {fileID: 2586787544430454692, guid: d55482d9888401849a90bb3d9f3a5075, type: 3}
+      propertyPath: ShinyEffect
+      value: 
+      objectReference: {fileID: 26247829969169322, guid: 5e874f8e48c4a1742ae52c6a779293e5, type: 3}
     - target: {fileID: 2586787544430454698, guid: d55482d9888401849a90bb3d9f3a5075, type: 3}
       propertyPath: m_Name
       value: Grid
