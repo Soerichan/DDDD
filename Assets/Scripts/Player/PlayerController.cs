@@ -18,25 +18,39 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float m_fGlideDefaultTimer;
 
+    [SerializeField]
+    private float m_fDefaultHP;
+
     public float m_fMoveSpeed;
     public float m_fGlideSpeed;
     public float m_fGlideTimer;
+    public float m_fNowHP;
+    public float m_fFullHP;
 
     public bool m_bGliding;
 
     private float m_fGlidingTimeChecker;
+
+  //  private Vector3 m_playerPosition;
+
+    private StageManager stageManager;
 
     PlayerState State;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_controller = GetComponent<CharacterController>(); 
-        m_animator = GetComponent<Animator>();
-        m_fMoveSpeed = m_fMoveDefaultSpeed;
-        m_fGlideSpeed=m_fGlideDefaultSpeed;
-        m_fGlideTimer= m_fGlideDefaultTimer;
+
+        stageManager          = GameObject.Find("StageManager").GetComponent<StageManager>();
+        m_controller          = GetComponent<CharacterController>(); 
+        m_animator            = GetComponent<Animator>();
+        m_fMoveSpeed          = m_fMoveDefaultSpeed;
+        m_fGlideSpeed         =m_fGlideDefaultSpeed;
+        m_fGlideTimer         = m_fGlideDefaultTimer;
         m_fGlidingTimeChecker = m_fGlideDefaultTimer;
+        m_fFullHP             = m_fDefaultHP;
+        m_fNowHP              = m_fFullHP;
+
 
         m_bGliding= false;
     }
@@ -45,6 +59,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Glide();
+       // stageManager.PlayerPosition = new Vector3(transform.position.x,0f,transform.position.z);
+        stageManager.PlayerPosition = transform.position;
         //Rotate();
     }
 
@@ -97,8 +113,8 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void Rotate()
+    public void Damaged(float damage)
     {
-        
+        m_fNowHP -= damage;
     }
 }
