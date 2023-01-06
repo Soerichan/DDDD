@@ -11,9 +11,11 @@ public class StageManager : Singleton<StageManager>
     public Vector3 PlayerPosition;
 
     public bool m_bIsGameOver;
+
     private void Awake()
     {
         RoomType room=RoomType.None;
+        m_player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
     // Update is called once per frame
     void Update()

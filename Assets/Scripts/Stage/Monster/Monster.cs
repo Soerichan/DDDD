@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-
+    [SerializeField]
     protected float m_fMoveSpeed;
+    [SerializeField]
     protected float m_fHP;
+    [SerializeField]
     protected float m_fExp;
-
+    [SerializeField]
     protected float m_fAttackDamage;
+    [SerializeField]
     protected float m_fAttackCoolTime;
 
     [SerializeField]
@@ -18,23 +21,26 @@ public class Monster : MonoBehaviour
 
     [SerializeField]
     protected float m_fAttackingTime;
-
+    [SerializeField]
     protected float m_fAttackingTimeChecker;
 
     [SerializeField]
     protected float m_fLastAttackTime;
 
     [SerializeField]
-    protected float m_fCorpseTime;
-
+    protected float m_fCorpseTime=1f;
+    [SerializeField]
     protected float m_fDistanceToPlayer;
-
+    [SerializeField]
     protected bool m_bIsDie;
+    [SerializeField]
     protected bool m_bIsAttack;
+    [SerializeField]
     protected bool m_bIsMove;
     
 
     protected Animator m_animator;
+    //[SerializeField]
     private StageManager stageManager;
    // protected Vector2 m_playerPosition;
 
@@ -42,6 +48,7 @@ public class Monster : MonoBehaviour
     protected virtual void Start()
     {
         stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
+        //Debug.Log("GET");
         m_animator= gameObject.GetComponentInChildren<Animator>();    
     }
 
@@ -103,7 +110,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    protected void AttackPlayer()
+    protected virtual void AttackPlayer()
     {
         //  var now = Time.time;
 
