@@ -42,8 +42,9 @@ public class Monster : MonoBehaviour
     protected Animator m_animator;
     //[SerializeField]
     private StageManager stageManager;
-   // protected Vector2 m_playerPosition;
+    // protected Vector2 m_playerPosition;
 
+    protected Vector3 ToPlayerDir;
 
     protected virtual void Start()
     {
@@ -92,8 +93,8 @@ public class Monster : MonoBehaviour
 
         if (m_fDistanceToPlayer > m_fAttackRange)
         {
-            
-            Vector3 ToPlayerDir = (stageManager.PlayerPosition - transform.position).normalized;
+
+            ToPlayerDir = (stageManager.PlayerPosition - transform.position).normalized;
             transform.forward = ToPlayerDir;
             transform.Translate(ToPlayerDir * m_fMoveSpeed * Time.deltaTime, Space.World);
             m_animator.SetBool("Move", true);
