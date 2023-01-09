@@ -16,6 +16,7 @@ public class EvileyeMissile : MonoBehaviour
     }
 
     // Update is called once per frame
+
     void Update()
     {
         transform.Translate(ToPlayerDir * m_fMoveSpeed * Time.deltaTime, Space.World);
