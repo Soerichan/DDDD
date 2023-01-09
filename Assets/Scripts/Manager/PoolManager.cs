@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolManager : Singleton<PoolManager>
+public class PoolManager :MonoBehaviour
 {
 
     [SerializeField]
@@ -18,12 +18,12 @@ public class PoolManager : Singleton<PoolManager>
     private void Awake()
     {
         PoolDic=new Dictionary<string, Stack<GameObject>>();
-       
+        CreatePoolDic();
     }
 
     private void Start()
     {
-        CreatePoolDic();
+       
     }
 
     private void OnEnable()
@@ -34,7 +34,7 @@ public class PoolManager : Singleton<PoolManager>
     private IEnumerator DelayToReturn()
     {
         yield return new WaitForSeconds(m_fReturnTime);
-        PoolManager.Instance.Release(gameObject);
+        Release(gameObject);
     }
 
     private void CreatePoolDic()
@@ -80,7 +80,7 @@ public class PoolManager : Singleton<PoolManager>
         Stack<GameObject> stack = new Stack<GameObject>();
         stack = PoolDic[instance.name];
         instance.SetActive(false);
-        PoolPrefab.Find(x=>Instance.name==x.Container.name);
+        PoolPrefab.Find(x=>name==x.Container.name);
         stack.Push(instance);
     }
 

@@ -1,20 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum RoomType { None, Room_RampageGuys, Room_Anvil, Room_HumanWave, Room_SturdyHunks, Room_Danger, Room_Cookie, Room_BOSS };
 
 public class MapManager : Singleton<MapManager>
 {
+    public static RoomType NowRoom = RoomType.Room_RampageGuys;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
-    }
+        var obj = FindObjectsOfType<MapManager>();
+        if (obj.Length == 1)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+     
     }
+ 
+
+
+
 }
