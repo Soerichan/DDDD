@@ -58,8 +58,9 @@ public class PoolManager :MonoBehaviour
 
     public GameObject Get(GameObject prefab)
     {
-        Stack<GameObject> stack = new Stack<GameObject>();
-        stack = PoolDic[prefab.name];
+        Stack<GameObject> stack =new Stack<GameObject>();
+            stack=PoolDic[prefab.name];
+        
 
         if(stack.Count>0)
         {
@@ -75,10 +76,10 @@ public class PoolManager :MonoBehaviour
 
     }
 
-    private void Release(GameObject instance)
+    public void Release(GameObject instance)
     {
         Stack<GameObject> stack = new Stack<GameObject>();
-        stack = PoolDic[instance.name];
+            stack= PoolDic[instance.name];
         instance.SetActive(false);
         PoolPrefab.Find(x=>name==x.Container.name);
         stack.Push(instance);

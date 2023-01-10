@@ -23,15 +23,15 @@ public class StageManager : Singleton<StageManager>
 
     private void Awake()
     {
-       
+
         m_player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     private void Start()
     {
-
-        StageStart();
-        StageTimeCheck();
+       
+        //tageStart();
+        //StageTimeCheck();
 
     }
     // Update is called once per frame
@@ -46,7 +46,7 @@ public class StageManager : Singleton<StageManager>
 
     #region StageStart
    
-    private void StageStart()
+    public void StageStart()
     {
         switch (MapManager.NowRoom)
         {
@@ -84,6 +84,9 @@ public class StageManager : Singleton<StageManager>
                 break;
 
         }
+
+        StageTimeCheck();
+        m_bIsGameOver = false;
     }
 
     private IEnumerator MonsterSpawn01()//RR
@@ -107,8 +110,8 @@ public class StageManager : Singleton<StageManager>
 
         while (true)
         {
-            int random = UnityEngine.Random.Range(1, 10);
-
+            int random = UnityEngine.Random.Range(0, 9);
+                
             GameObject instance = m_poolManager.Get(prefabs[1]);
             instance.transform.position = MonsterSpawner[random].transform.position;
             instance.transform.rotation = Quaternion.identity;
@@ -141,9 +144,9 @@ public class StageManager : Singleton<StageManager>
         while (true)
         {
 
-            int random = UnityEngine.Random.Range(1, 10);
+            int random = UnityEngine.Random.Range(0, 9);
 
-            GameObject instance = m_poolManager.Get(prefabs[1]);
+            GameObject instance = m_poolManager.Get(prefabs[3]);
             instance.transform.position = MonsterSpawner[random].transform.position;
             instance.transform.rotation = Quaternion.identity;
 
@@ -267,7 +270,7 @@ public class StageManager : Singleton<StageManager>
 
     private IEnumerator TimeChecker()
     {
-        yield return new WaitForSeconds(90);
+        yield return new WaitForSeconds(5);
         StageEndToNext();
         
     }
@@ -279,14 +282,8 @@ public class StageManager : Singleton<StageManager>
     private void StageEndToNext()
     {
         Debug.Log("다음으로");
-        StopCoroutine(MonsterSpawn01());
-        StopCoroutine(MonsterSpawn02());
-        StopCoroutine(MonsterSpawn03());
-        StopCoroutine(MonsterSpawn04());
-        StopCoroutine(MonsterSpawn05());
-        StopCoroutine(MonsterSpawn06());
-        StopCoroutine(MonsterSpawn07());
-
+        StopAllCoroutines();
+        m_bIsGameOver = true;
         GameProceedUI.SetActive(true);
 
     }
@@ -294,13 +291,8 @@ public class StageManager : Singleton<StageManager>
     private void StageEndToReplay()
     {
         Debug.Log("게임오버");
-        StopCoroutine(MonsterSpawn01());
-        StopCoroutine(MonsterSpawn02());
-        StopCoroutine(MonsterSpawn03());
-        StopCoroutine(MonsterSpawn04());
-        StopCoroutine(MonsterSpawn05());
-        StopCoroutine(MonsterSpawn06());
-        StopCoroutine(MonsterSpawn07());
+        StopAllCoroutines();
+        m_bIsGameOver = true;
 
         GameOverUI.SetActive(true);
     }

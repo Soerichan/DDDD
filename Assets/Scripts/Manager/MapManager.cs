@@ -5,7 +5,7 @@ public enum RoomType { None, Room_RampageGuys, Room_Anvil, Room_HumanWave, Room_
 
 public class MapManager : Singleton<MapManager>
 {
-    public static RoomType NowRoom = RoomType.Room_RampageGuys;
+    public static RoomType NowRoom = RoomType.None;
 
     private void Awake()
     {
@@ -21,7 +21,8 @@ public class MapManager : Singleton<MapManager>
 
      
     }
- 
+
+   
 
 
 

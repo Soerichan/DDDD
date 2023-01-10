@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MapGrid : MonoBehaviour
-{
+{ 
     [SerializeField]
     private MapRoomButton MapButton01;
     [SerializeField]
@@ -46,220 +47,239 @@ public class MapGrid : MonoBehaviour
 
     public int m_iCleardStage;
 
+    private bool m_bIsNewGame;
+
+    private void Awake()
+    {
+        //var obj = FindObjectsOfType<MapGrid>();
+        //if (obj.Length == 1)
+        //{
+        //    DontDestroyOnLoad(gameObject);
+        //    m_bIsNewGame = true;
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
+    }
+
     private void Start()
     {
-        m_iCleardStage = 0;
+        
+            m_iCleardStage = 0;
 
-        for (int y = 0; y < gridSize.y; y++)
-        {
-            if (y == gridSize.y - 1)
+            for (int y = 0; y < gridSize.y; y++)
             {
-
-                if (mapMaker.MapArray[0, y - 1] == 1)
+                if (y == gridSize.y - 1)
                 {
-                    MapRoad maproad = Instantiate(Road04, transform);
-                    maproad.transform.localPosition = new Vector2((0 + 1.4f) * placeSize, (y + 0.05f) * placeSize);
+
+                    if (mapMaker.MapArray[0, y - 1] == 1)
+                    {
+                        MapRoad maproad = Instantiate(Road04, transform);
+                        maproad.transform.localPosition = new Vector2((0 + 1.4f) * placeSize, (y + 0.05f) * placeSize);
+                    }
+
+                    if (mapMaker.MapArray[gridSize.x - 1, y - 1] == 1)
+                    {
+                        MapRoad maproad = Instantiate(Road05, transform);
+                        maproad.transform.localPosition = new Vector2((4 - 0.4f) * placeSize, (y + 0.05f) * placeSize);
+                    }
+
                 }
 
-                if (mapMaker.MapArray[gridSize.x-1, y - 1] == 1)
+                for (int x = 0; x < gridSize.x; x++)
                 {
-                    MapRoad maproad = Instantiate(Road05, transform);
-                    maproad.transform.localPosition = new Vector2((4 -0.4f) * placeSize, (y + 0.05f) * placeSize);
-                }
 
+
+                    if (y > 0)
+                    {
+                        if (mapMaker.MapArray[x, y - 1] == 1 && mapMaker.MapArray[x, y] == 1)
+                        {
+                            MapRoad maproad = Instantiate(Road01, transform);
+                            maproad.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.05f) * placeSize);
+                        }
+
+                        if (x > 1)
+                        {
+
+                            if (mapMaker.MapArray[x - 1, y - 1] == 1 && mapMaker.MapArray[x, y] == 1)
+                            {
+                                MapRoad maproad = Instantiate(Road02, transform);
+                                maproad.transform.localPosition = new Vector2((x) * placeSize, (y + 0.05f) * placeSize);
+                            }
+                        }
+                        else if (x == 0)
+                        {
+                            if (mapMaker.MapArray[0, y - 1] == 1 && mapMaker.MapArray[1, y] == 1)
+                            {
+                                MapRoad maproad = Instantiate(Road02, transform);
+                                maproad.transform.localPosition = new Vector2((x + 1f) * placeSize, (y + 0.05f) * placeSize);
+                            }
+                        }
+
+                        if (x < gridSize.x - 1)
+                        {
+                            if (mapMaker.MapArray[x + 1, y - 1] == 1 && mapMaker.MapArray[x, y] == 1)
+                            {
+                                MapRoad maproad = Instantiate(Road03, transform);
+                                maproad.transform.localPosition = new Vector2((x + 1f) * placeSize, (y + 0.05f) * placeSize);
+                            }
+                        }
+                        else if (x == gridSize.x - 1)
+                        {
+
+                            if (mapMaker.MapArray[gridSize.x - 1, y - 1] == 1 && mapMaker.MapArray[gridSize.x - 1, y] == 1)
+                            {
+                                MapRoad maproad = Instantiate(Road03, transform);
+                                maproad.transform.localPosition = new Vector2((x) * placeSize, (y + 0.05f) * placeSize);
+                            }
+                        }
+
+                    }
+                }
             }
 
-            for (int x = 0; x < gridSize.x; x++)
+
+            for (int y = 0; y < gridSize.y; y++)
             {
-                
-
-                if (y > 0)
+                for (int x = 0; x < gridSize.x; x++)
                 {
-                    if (mapMaker.MapArray[x, y - 1] == 1 && mapMaker.MapArray[x, y] == 1)
+                    if (0 == mapMaker.MapArray[x, y])
                     {
-                        MapRoad maproad = Instantiate(Road01, transform);
-                        maproad.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y+0.05f) * placeSize);
-                    }
-
-                    if (x > 1)
-                    {
-
-                        if (mapMaker.MapArray[x - 1, y - 1] == 1 && mapMaker.MapArray[x, y] == 1)
-                        {
-                            MapRoad maproad = Instantiate(Road02, transform);
-                            maproad.transform.localPosition = new Vector2((x) * placeSize, (y + 0.05f) * placeSize);
-                        }
-                    }
-                    else if(x==0)
-                    {
-                        if (mapMaker.MapArray[0, y - 1] == 1 && mapMaker.MapArray[1, y] == 1)
-                        {
-                            MapRoad maproad = Instantiate(Road02, transform);
-                            maproad.transform.localPosition = new Vector2((x+1f) * placeSize, (y + 0.05f) * placeSize);
-                        }
-                    }
-
-                    if (x < gridSize.x - 1)
-                    {
-                        if (mapMaker.MapArray[x + 1, y - 1] == 1 && mapMaker.MapArray[x, y] == 1)
-                        {
-                            MapRoad maproad = Instantiate(Road03, transform);
-                            maproad.transform.localPosition = new Vector2((x+1f) * placeSize, (y + 0.05f) * placeSize);
-                        }
-                    }
-                    else if(x== gridSize.x - 1)
-                    {
-
-                        if (mapMaker.MapArray[gridSize.x - 1, y - 1] == 1 && mapMaker.MapArray[gridSize.x - 1, y] == 1)
-                        {
-                            MapRoad maproad = Instantiate(Road03, transform);
-                            maproad.transform.localPosition = new Vector2((x) * placeSize, (y + 0.05f) * placeSize);
-                        }
-                    }
-
-                }
-            }
-        }
-
-
-        for (int y = 0; y < gridSize.y; y++)
-        {
-            for (int x = 0; x < gridSize.x; x++)
-            {
-                if(0==mapMaker.MapArray[x,y])
-                {
-                    continue;
-                }
-
-              
-
-                if (x==2&&y==9)
-                {
-                    MapRoomButton buttonPlace = Instantiate(MapButton07, transform);
-                    buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                    buttonPlace.x = x;
-                    buttonPlace.y = y;
-                    MapRoomButtonArray[2, 9] = buttonPlace;
-
-                    GameObject shinyPlace = Instantiate(ShinyEffect, transform);
-                    shinyPlace.transform.localPosition= new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                    ShinyEffecrtArray[2, 9] = shinyPlace;
-                    shinyPlace.SetActive(false);
-
-                    continue;
-                }
-
-
-                int randomRoom = UnityEngine.Random.Range(1, 7);
-
-                switch (randomRoom)
-                {
-                    case 1:
-                        {
-                            MapRoomButton buttonPlace = Instantiate(MapButton01, transform);
-                            buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                            buttonPlace.x = x;
-                            buttonPlace.y = y;
-                            MapRoomButtonArray[x, y] = buttonPlace;
-
-                            GameObject shinyPlace = Instantiate(ShinyEffect, transform);
-                            shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                            ShinyEffecrtArray[x, y] = shinyPlace;
-                            shinyPlace.SetActive(false);
-
-                            break;
-                        }
-                    case 2:
-                        {
-                            MapRoomButton buttonPlace = Instantiate(MapButton02, transform);
-                            buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                            buttonPlace.x = x;
-                            buttonPlace.y = y;
-                            MapRoomButtonArray[x, y] = buttonPlace;
-
-                            GameObject shinyPlace = Instantiate(ShinyEffect, transform);
-                            shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                            ShinyEffecrtArray[x, y] = shinyPlace;
-                            shinyPlace.SetActive(false);
-
-                            break;
-                        }
-                    case 3:
-                        {
-                            MapRoomButton buttonPlace = Instantiate(MapButton03, transform);
-                            buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                            buttonPlace.x = x;
-                            buttonPlace.y = y;
-                            MapRoomButtonArray[x, y] = buttonPlace;
-
-                            GameObject shinyPlace = Instantiate(ShinyEffect, transform);
-                            shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                            ShinyEffecrtArray[x, y] = shinyPlace;
-                            shinyPlace.SetActive(false);
-
-                            break;
-                        }
-                
-                    case 4:
-                        {
-                            MapRoomButton buttonPlace = Instantiate(MapButton04, transform);
-                            buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                            buttonPlace.x = x;
-                            buttonPlace.y = y;
-                            MapRoomButtonArray[x, y] = buttonPlace;
-
-                            GameObject shinyPlace = Instantiate(ShinyEffect, transform);
-                            shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                            ShinyEffecrtArray[x, y] = shinyPlace;
-                            shinyPlace.SetActive(false);
-
-                            break;
-                        }
-                    case 5:
-                        {
-                            MapRoomButton buttonPlace = Instantiate(MapButton05, transform);
-                            buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                            buttonPlace.x = x;
-                            buttonPlace.y = y;
-                            MapRoomButtonArray[x, y] = buttonPlace;
-
-                            GameObject shinyPlace = Instantiate(ShinyEffect, transform);
-                            shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                            ShinyEffecrtArray[x, y] = shinyPlace;
-                            shinyPlace.SetActive(false);
-
-                            break;
-                        }
-                    case 6:
-                        {
-                            MapRoomButton buttonPlace = Instantiate(MapButton06, transform);
-                            buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                            buttonPlace.x = x;
-                            buttonPlace.y = y;
-                            MapRoomButtonArray[x, y] = buttonPlace;
-
-                            GameObject shinyPlace = Instantiate(ShinyEffect, transform);
-                            shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
-                            ShinyEffecrtArray[x, y] = shinyPlace;
-                            shinyPlace.SetActive(false);
-
-                            break;
-                        }
-                    default:
                         continue;
+                    }
+
+
+
+                    if (x == 2 && y == 9)
+                    {
+                        MapRoomButton buttonPlace = Instantiate(MapButton07, transform);
+                        buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                        buttonPlace.x = x;
+                        buttonPlace.y = y;
+                        MapRoomButtonArray[2, 9] = buttonPlace;
+
+                        GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                        shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                        ShinyEffecrtArray[2, 9] = shinyPlace;
+                        shinyPlace.SetActive(false);
+
+                        continue;
+                    }
+
+
+                    int randomRoom = UnityEngine.Random.Range(1, 7);
+
+                    switch (randomRoom)
+                    {
+                        case 1:
+                            {
+                                MapRoomButton buttonPlace = Instantiate(MapButton01, transform);
+                                buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                                buttonPlace.x = x;
+                                buttonPlace.y = y;
+                                MapRoomButtonArray[x, y] = buttonPlace;
+
+                                GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                                shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                                ShinyEffecrtArray[x, y] = shinyPlace;
+                                shinyPlace.SetActive(false);
+
+                                break;
+                            }
+                        case 2:
+                            {
+                                MapRoomButton buttonPlace = Instantiate(MapButton02, transform);
+                                buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                                buttonPlace.x = x;
+                                buttonPlace.y = y;
+                                MapRoomButtonArray[x, y] = buttonPlace;
+
+                                GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                                shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                                ShinyEffecrtArray[x, y] = shinyPlace;
+                                shinyPlace.SetActive(false);
+
+                                break;
+                            }
+                        case 3:
+                            {
+                                MapRoomButton buttonPlace = Instantiate(MapButton03, transform);
+                                buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                                buttonPlace.x = x;
+                                buttonPlace.y = y;
+                                MapRoomButtonArray[x, y] = buttonPlace;
+
+                                GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                                shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                                ShinyEffecrtArray[x, y] = shinyPlace;
+                                shinyPlace.SetActive(false);
+
+                                break;
+                            }
+
+                        case 4:
+                            {
+                                MapRoomButton buttonPlace = Instantiate(MapButton04, transform);
+                                buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                                buttonPlace.x = x;
+                                buttonPlace.y = y;
+                                MapRoomButtonArray[x, y] = buttonPlace;
+
+                                GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                                shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                                ShinyEffecrtArray[x, y] = shinyPlace;
+                                shinyPlace.SetActive(false);
+
+                                break;
+                            }
+                        case 5:
+                            {
+                                MapRoomButton buttonPlace = Instantiate(MapButton05, transform);
+                                buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                                buttonPlace.x = x;
+                                buttonPlace.y = y;
+                                MapRoomButtonArray[x, y] = buttonPlace;
+
+                                GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                                shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                                ShinyEffecrtArray[x, y] = shinyPlace;
+                                shinyPlace.SetActive(false);
+
+                                break;
+                            }
+                        case 6:
+                            {
+                                MapRoomButton buttonPlace = Instantiate(MapButton06, transform);
+                                buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                                buttonPlace.x = x;
+                                buttonPlace.y = y;
+                                MapRoomButtonArray[x, y] = buttonPlace;
+
+                                GameObject shinyPlace = Instantiate(ShinyEffect, transform);
+                                shinyPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize, (y + 0.5f) * placeSize);
+                                ShinyEffecrtArray[x, y] = shinyPlace;
+                                shinyPlace.SetActive(false);
+
+                                break;
+                            }
+                        default:
+                            continue;
+                    }
+
+
+
+
+                    //  mapMaker.
+                    //  MapRoomButton buttonPlace = Instantiate(MapButton, transform);
+                    //buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize,(y + 0.5f) * placeSize);
                 }
-
-
-
-                
-                //  mapMaker.
-                //  MapRoomButton buttonPlace = Instantiate(MapButton, transform);
-                //buttonPlace.transform.localPosition = new Vector2((x + 0.5f) * placeSize,(y + 0.5f) * placeSize);
             }
-        }
-        ShinyEffecrtArray[1, 0].SetActive(true);
-        ShinyEffecrtArray[2, 0].SetActive(true);
-        ShinyEffecrtArray[3, 0].SetActive(true);
+            ShinyEffecrtArray[1, 0].SetActive(true);
+            ShinyEffecrtArray[2, 0].SetActive(true);
+            ShinyEffecrtArray[3, 0].SetActive(true);
+
+      
     }
 
     private void OnDrawGizmos()

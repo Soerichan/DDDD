@@ -7,10 +7,24 @@ public class MapMaker : MonoBehaviour
 {
     public int[,] MapArray = new int[5, 10];
     bool IsFrontCompartmentWithi;
+    //private bool m_bIsNewGame;
 
     private void Awake()
     {
-        MapMake();
+       
+        //var obj = FindObjectsOfType<MapMaker>();
+        //if (obj.Length == 1)
+        //{
+        //    DontDestroyOnLoad(gameObject);
+        //   // m_bIsNewGame = true;
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
+
+            MapMake();
+        
     }
 
  

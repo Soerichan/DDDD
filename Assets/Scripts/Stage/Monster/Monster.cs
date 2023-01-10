@@ -41,14 +41,16 @@ public class Monster : MonoBehaviour
 
     protected Animator m_animator;
     //[SerializeField]
-    private StageManager stageManager;
+    private StageManager m_stageManager;
+    private PoolManager m_poolmanager;
     // protected Vector2 m_playerPosition;
 
     protected Vector3 ToPlayerDir;
 
     protected virtual void Start()
     {
-        stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
+        m_stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
+        m_poolmanager = GameObject.Find("PoolManager").GetComponent<PoolManager>();
         //Debug.Log("GET");
         m_animator= gameObject.GetComponentInChildren<Animator>();    
     }
@@ -76,7 +78,7 @@ public class Monster : MonoBehaviour
             }
         }
 
-        if(m_fHP<=0)
+        if(m_fHP<=0||m_stageManager.m_bIsGameOver==true)
         {
              Die();
             Debug.Log("¾Ö¿À¿Ë");
@@ -85,7 +87,7 @@ public class Monster : MonoBehaviour
 
     protected void ChasePlayer()
     {
-        m_fDistanceToPlayer = Vector3.Distance(transform.position, stageManager.PlayerPosition);
+        m_fDistanceToPlayer = Vector3.Distance(transform.position, m_stageManager.PlayerPosition);
 
        // Debug.Log(transform.position);
       //  Debug.Log(stageManager.PlayerPosition);
@@ -94,7 +96,7 @@ public class Monster : MonoBehaviour
         if (m_fDistanceToPlayer > m_fAttackRange)
         {
 
-            ToPlayerDir = (stageManager.PlayerPosition - transform.position).normalized;
+            ToPlayerDir = (m_stageManager.PlayerPosition - transform.position).normalized;
             transform.forward = ToPlayerDir;
             transform.Translate(ToPlayerDir * m_fMoveSpeed * Time.deltaTime, Space.World);
             m_animator.SetBool("Move", true);
@@ -123,7 +125,7 @@ public class Monster : MonoBehaviour
         {
             m_bIsAttack = true;
             m_animator.SetTrigger("Attack");
-            stageManager.m_player.Damaged(m_fAttackDamage);
+            m_stageManager.m_player.Damaged(m_fAttackDamage);
         }
 
 
@@ -132,6 +134,7 @@ public class Monster : MonoBehaviour
     protected void Die()
     {
         m_animator.SetTrigger("Die");
+        m_poolmanager.Release(this.gameObject);
     }
 
 

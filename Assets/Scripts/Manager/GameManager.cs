@@ -7,6 +7,11 @@ public class GameManager : Singleton<GameManager>
 {
     public void GameStart()
     {
+        SceneManager.LoadScene("Scenes/MapScene");
+    }
+
+    public void StageStart()
+    {
         SceneManager.LoadScene("Scenes/GameScene");
     }
 }
