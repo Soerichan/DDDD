@@ -51,16 +51,16 @@ public class MapGrid : MonoBehaviour
 
     private void Awake()
     {
-        //var obj = FindObjectsOfType<MapGrid>();
-        //if (obj.Length == 1)
-        //{
-        //    DontDestroyOnLoad(gameObject);
-        //    m_bIsNewGame = true;
-        //}
-        //else
-        //{
-        //    Destroy(gameObject);
-        //}
+        var obj = FindObjectsOfType<MapGrid>();
+        if (obj.Length == 1)
+        {
+            DontDestroyOnLoad(gameObject);
+            m_bIsNewGame = true;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()

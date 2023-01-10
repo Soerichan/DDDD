@@ -79,7 +79,7 @@ public class PoolManager :MonoBehaviour
     public void Release(GameObject instance)
     {
         Stack<GameObject> stack = new Stack<GameObject>();
-            stack= PoolDic[instance.name];
+        stack= PoolDic[instance.name];
         instance.SetActive(false);
         PoolPrefab.Find(x=>name==x.Container.name);
         stack.Push(instance);

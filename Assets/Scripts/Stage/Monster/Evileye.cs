@@ -32,9 +32,12 @@ public class Evileye : Monster
 
     private void CreateMissile()
     {
-        EvileyeMissile m_missile = new EvileyeMissile();
-        m_missile.ToPlayerDir = ToPlayerDir;
-        Instantiate(m_missile, transform);
+       // EvileyeMissile instance = Instantiate(transform.position, Quaternion.identity);
+      //  m_missile.ToPlayerDir = ToPlayerDir;
+       
+       
+
+
     }
 }
 
