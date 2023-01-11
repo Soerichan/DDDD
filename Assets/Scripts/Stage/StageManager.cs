@@ -15,6 +15,8 @@ public class StageManager : Singleton<StageManager>
     private GameObject GameOverUI;
     [SerializeField]
     private PoolManager m_poolManager;
+    [SerializeField]
+    private GameObject m_hpUI;
     public PlayerController m_player;
     public float m_playerNowHP;
     public Vector3 PlayerPosition;
@@ -41,6 +43,8 @@ public class StageManager : Singleton<StageManager>
         {
             StageEndToReplay();
         }
+
+       
     }
 
 
@@ -48,6 +52,11 @@ public class StageManager : Singleton<StageManager>
    
     public void StageStart()
     {
+        m_hpUI.SetActive(true);
+        m_player.StartStage();
+    
+        
+
         switch (MapManager.NowRoom)
         {
             case RoomType.None:
@@ -70,7 +79,7 @@ public class StageManager : Singleton<StageManager>
                 break;
             case RoomType.Room_Danger:
                 StartCoroutine(MonsterSpawn05());
-                StartCoroutine(MonsterSpawn06());
+               // StartCoroutine(MonsterSpawn06());
                 break;
             case RoomType.Room_Cookie:
                 StartCoroutine(MonsterSpawn07());
@@ -270,7 +279,7 @@ public class StageManager : Singleton<StageManager>
 
     private IEnumerator TimeChecker()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(90);
         StageEndToNext();
         
     }

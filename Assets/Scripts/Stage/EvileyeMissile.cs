@@ -13,6 +13,7 @@ public class EvileyeMissile : MonoBehaviour
     void Start()
     {
         stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
+        StartCoroutine(LifeSpanCorutine());
     }
 
     // Update is called once per frame
@@ -21,26 +22,28 @@ public class EvileyeMissile : MonoBehaviour
     {
         transform.Translate(ToPlayerDir * m_fMoveSpeed * Time.deltaTime, Space.World);
 
-        m_LifeSpan-=Time.deltaTime;
-
-
-
-        if(m_LifeSpan<=0)
-        {
-            Destroy(this);
-        }
+       
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        var that = collision.gameObject.tag;
+        
+        var that = other.gameObject.tag;
 
         if(that != null)
         {
-            if(that=="Player")
+           
+            if (that=="Player")
             {
                 stageManager.m_player.Damaged(m_fDamage);
+               
             }
         }
+    }
+
+    private IEnumerator LifeSpanCorutine()
+    {
+        yield return new WaitForSeconds(7f);
+        Destroy(gameObject);    
     }
 }

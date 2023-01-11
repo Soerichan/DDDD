@@ -75,6 +75,7 @@ public class MapRoomButton : MonoBehaviour
         // SceneManager.LoadScene("Scenes/GameScene");
         m_mapUI.SetActive(false);
         m_stageManager.StageStart();
+        
     }
 
     public void ClickMapRoomButton01()

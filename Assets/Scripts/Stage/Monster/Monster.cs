@@ -41,8 +41,8 @@ public class Monster : MonoBehaviour
 
     protected Animator m_animator;
     //[SerializeField]
-    private StageManager m_stageManager;
-    private PoolManager m_poolmanager;
+    protected StageManager m_stageManager;
+    protected PoolManager m_poolmanager;
     // protected Vector2 m_playerPosition;
 
     protected Vector3 ToPlayerDir;
@@ -63,25 +63,28 @@ public class Monster : MonoBehaviour
 
             AttackPlayer();
 
+            
         }
-        else
-        {
-            m_fAttackingTimeChecker -= Time.deltaTime;
+        //else
+        //{
+        //    m_fAttackingTimeChecker -= Time.deltaTime;
 
-            if(m_fAttackingTimeChecker <= 0)
-            {
-                m_bIsAttack = false;
+        //    if(m_fAttackingTimeChecker <= 0)
+        //    {
+        //        m_bIsAttack = false;
 
-                m_fAttackingTimeChecker = m_fAttackingTime;
+        //        m_fAttackingTimeChecker = m_fAttackingTime;
 
-                m_animator.SetTrigger("EndAttack");
-            }
-        }
+        //        m_animator.SetTrigger("EndAttack");
+        //    }
+
+         
+        //}
 
         if(m_fHP<=0||m_stageManager.m_bIsGameOver==true)
         {
              Die();
-            Debug.Log("局坷克");
+           // Debug.Log("局坷克");
         }
     }
 
@@ -108,8 +111,7 @@ public class Monster : MonoBehaviour
         else
         {
             m_animator.SetBool("Move", false);
-            AttackPlayer();
-            Debug.Log("局快旷");
+         
         }
     }
 
@@ -126,6 +128,7 @@ public class Monster : MonoBehaviour
             m_bIsAttack = true;
             m_animator.SetTrigger("Attack");
             m_stageManager.m_player.Damaged(m_fAttackDamage);
+            StartCoroutine(AttackCorutine());
         }
 
 
@@ -137,5 +140,15 @@ public class Monster : MonoBehaviour
         m_poolmanager.Release(this.gameObject);
     }
 
+    protected IEnumerator AttackCorutine()
+    {
+        yield return new WaitForSeconds(m_fAttackingTime);
+
+        m_bIsAttack = false;
+
+        //m_fAttackingTimeChecker = m_fAttackingTime;
+
+        m_animator.SetTrigger("EndAttack");
+    }
 
 }

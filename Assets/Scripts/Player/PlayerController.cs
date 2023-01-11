@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float m_fDefaultHP;
 
+    [SerializeField]
+    private HPUI m_hPUI;
+
     public float m_fMoveSpeed;
     public float m_fGlideSpeed;
     public float m_fGlideTimer;
@@ -31,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     private float m_fGlidingTimeChecker;
 
+    
   //  private Vector3 m_playerPosition;
 
     private StageManager stageManager;
@@ -51,6 +55,8 @@ public class PlayerController : MonoBehaviour
         m_fFullHP             = m_fDefaultHP;
         m_fNowHP              = m_fFullHP;
 
+       // m_hPUI.SetMaxHPBar(m_fFullHP);
+
 
         m_bGliding= false;
     }
@@ -61,6 +67,8 @@ public class PlayerController : MonoBehaviour
         Glide();
        // stageManager.PlayerPosition = new Vector3(transform.position.x,0f,transform.position.z);
         stageManager.PlayerPosition = transform.position;
+        
+        m_hPUI.SetHPBar(m_fNowHP);
         //Rotate();
     }
 
@@ -116,5 +124,11 @@ public class PlayerController : MonoBehaviour
     public void Damaged(float damage)
     {
         m_fNowHP -= damage;
+    }
+
+    public void StartStage()
+    {
+        m_hPUI.SetMaxHPBar(m_fFullHP);
+        m_fNowHP = m_fFullHP;
     }
 }

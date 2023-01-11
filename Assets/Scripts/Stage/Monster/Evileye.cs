@@ -27,13 +27,18 @@ public class Evileye : Monster
             m_bIsAttack = true;
             m_animator.SetTrigger("Attack");
             CreateMissile();
+            Debug.Log("»Ð");
+            StartCoroutine(AttackCorutine());
         }
+
     }
 
     private void CreateMissile()
     {
-       // EvileyeMissile instance = Instantiate(transform.position, Quaternion.identity);
-      //  m_missile.ToPlayerDir = ToPlayerDir;
+        Vector3 MissileStartPosition = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
+        EvileyeMissile instance = Instantiate(m_missile, MissileStartPosition, Quaternion.identity);
+        instance.ToPlayerDir = ToPlayerDir;
+        Debug.Log("½¹");
        
        
 
