@@ -67,8 +67,8 @@ public class PlayerController : MonoBehaviour
         Glide();
        // stageManager.PlayerPosition = new Vector3(transform.position.x,0f,transform.position.z);
         stageManager.PlayerPosition = transform.position;
-        
-        m_hPUI.SetHPBar(m_fNowHP);
+
+       
         //Rotate();
     }
 

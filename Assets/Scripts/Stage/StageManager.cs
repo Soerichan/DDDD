@@ -16,7 +16,11 @@ public class StageManager : Singleton<StageManager>
     [SerializeField]
     private PoolManager m_poolManager;
     [SerializeField]
-    private GameObject m_hpUI;
+    private HPUI m_hpUI;
+    [SerializeField]
+    private TimerUI m_timerUI;
+
+   
     public PlayerController m_player;
     public float m_playerNowHP;
     public Vector3 PlayerPosition;
@@ -52,9 +56,12 @@ public class StageManager : Singleton<StageManager>
    
     public void StageStart()
     {
-        m_hpUI.SetActive(true);
+        m_hpUI.gameObject.SetActive(true);
+        m_timerUI.gameObject.SetActive(true);
+        m_timerUI.StageStart();
+
         m_player.StartStage();
-    
+        
         
 
         switch (MapManager.NowRoom)
@@ -104,7 +111,7 @@ public class StageManager : Singleton<StageManager>
        {
            for (int a = 0; a < MonsterSpawner.Length; a++)
            {
-               Debug.Log("애우오우오오옹");
+               
                GameObject instance = m_poolManager.Get(prefabs[0]);
                instance.transform.position = MonsterSpawner[a].transform.position;
                instance.transform.rotation = Quaternion.identity;
@@ -293,6 +300,9 @@ public class StageManager : Singleton<StageManager>
         Debug.Log("다음으로");
         StopAllCoroutines();
         m_bIsGameOver = true;
+        m_hpUI.gameObject.SetActive(false);
+        m_timerUI.StageEnd();
+        m_timerUI.gameObject.SetActive(false);
         GameProceedUI.SetActive(true);
 
     }
@@ -302,7 +312,9 @@ public class StageManager : Singleton<StageManager>
         Debug.Log("게임오버");
         StopAllCoroutines();
         m_bIsGameOver = true;
-
+        m_hpUI.gameObject.SetActive(false);
+        m_timerUI.StageEnd();
+        m_timerUI.gameObject.SetActive(false);
         GameOverUI.SetActive(true);
     }
 }
