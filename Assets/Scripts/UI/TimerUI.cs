@@ -19,7 +19,7 @@ public class TimerUI : MonoBehaviour
         
      
        
-        m_bRunning = false;
+       // m_bRunning = false;
        // StageStart();
     }
 
