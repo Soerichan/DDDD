@@ -6,26 +6,26 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     [SerializeField]
-    protected float m_fMoveSpeed;
+    public float m_fMoveSpeed;
     [SerializeField]
-    protected float m_fHP;
+    public float m_fHP;
     [SerializeField]
-    protected float m_fExp;
+    public float m_fExp;
     [SerializeField]
-    protected float m_fAttackDamage;
+    public float m_fAttackDamage;
     [SerializeField]
-    protected float m_fAttackCoolTime;
+    public float m_fAttackCoolTime;
 
     [SerializeField]
-    protected float m_fAttackRange;
+    public float m_fAttackRange;
 
     [SerializeField]
-    protected float m_fAttackingTime;
+    public float m_fAttackingTime;
     [SerializeField]
-    protected float m_fAttackingTimeChecker;
+    public float m_fAttackingTimeChecker;
 
     [SerializeField]
-    protected float m_fLastAttackTime;
+    public float m_fLastAttackTime;
 
     [SerializeField]
     protected float m_fCorpseTime=1f;
@@ -37,22 +37,26 @@ public class Monster : MonoBehaviour
     protected bool m_bIsAttack;
     [SerializeField]
     protected bool m_bIsMove;
-    
 
+
+    protected float m_fNowSpeed;
+    protected float m_fNowHP;
     protected Animator m_animator;
-    //[SerializeField]
+ 
     protected StageManager m_stageManager;
     protected PoolManager m_poolmanager;
-    // protected Vector2 m_playerPosition;
+   
 
     protected Vector3 ToPlayerDir;
 
     protected virtual void Start()
     {
-        m_stageManager = GameObject.Find("StageManager").GetComponent<StageManager>();
-        m_poolmanager = GameObject.Find("PoolManager").GetComponent<PoolManager>();
-        //Debug.Log("GET");
-        m_animator= gameObject.GetComponentInChildren<Animator>();    
+        m_stageManager      = GameObject.Find("StageManager").GetComponent<StageManager>();
+        m_poolmanager       = GameObject.Find("PoolManager").GetComponent<PoolManager>();
+       
+        m_animator          = gameObject.GetComponentInChildren<Animator>();
+        m_fNowHP            = m_fHP;
+        m_fNowSpeed         = m_fMoveSpeed;
     }
 
     protected virtual void Update()
@@ -65,26 +69,12 @@ public class Monster : MonoBehaviour
 
             
         }
-        //else
-        //{
-        //    m_fAttackingTimeChecker -= Time.deltaTime;
-
-        //    if(m_fAttackingTimeChecker <= 0)
-        //    {
-        //        m_bIsAttack = false;
-
-        //        m_fAttackingTimeChecker = m_fAttackingTime;
-
-        //        m_animator.SetTrigger("EndAttack");
-        //    }
-
-         
-        //}
+ 
 
         if(m_fHP<=0||m_stageManager.m_bIsGameOver==true)
         {
              Die();
-           // Debug.Log("¾Ö¿À¿Ë");
+          
         }
     }
 
@@ -92,21 +82,17 @@ public class Monster : MonoBehaviour
     {
         m_fDistanceToPlayer = Vector3.Distance(transform.position, m_stageManager.PlayerPosition);
 
-       // Debug.Log(transform.position);
-      //  Debug.Log(stageManager.PlayerPosition);
-       // Debug.Log(m_fDistanceToPlayer);
-
+   
         if (m_fDistanceToPlayer > m_fAttackRange)
         {
 
             ToPlayerDir = (m_stageManager.PlayerPosition - transform.position).normalized;
             transform.forward = ToPlayerDir;
-            transform.Translate(ToPlayerDir * m_fMoveSpeed * Time.deltaTime, Space.World);
+            transform.Translate(ToPlayerDir * m_fNowSpeed * Time.deltaTime, Space.World);
             m_animator.SetBool("Move", true);
 
 
-            //Debug.Log(ToPlayerDir);
-            
+      
         }
         else
         {
@@ -117,12 +103,7 @@ public class Monster : MonoBehaviour
 
     protected virtual void AttackPlayer()
     {
-        //  var now = Time.time;
-
-        //  if(m_fAttackCoolTime>m_fLastAttackTime-now)
-        // {
-        //      return;
-        //  }
+     
         if (m_fDistanceToPlayer <= m_fAttackRange)
         {
             m_bIsAttack = true;
@@ -146,9 +127,25 @@ public class Monster : MonoBehaviour
 
         m_bIsAttack = false;
 
-        //m_fAttackingTimeChecker = m_fAttackingTime;
+    
 
         m_animator.SetTrigger("EndAttack");
     }
 
+    public void Damaged(float Damage)
+    {
+        m_fNowHP-=Damage;
+    }
+
+    public void Slowed(float SlowPer)
+    {
+        m_fNowSpeed = m_fNowSpeed * SlowPer;
+        StartCoroutine(SlowIsEnd());
+    }
+
+    private IEnumerator SlowIsEnd()
+    {
+        yield return new WaitForSeconds(4f);
+        m_fNowSpeed = m_fMoveSpeed;
+    }
 }

@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private HPUI m_hPUI;
 
+    [SerializeField]
+    public List<Weapon> m_AllWeapon;
+
     public float m_fMoveSpeed;
     public float m_fGlideSpeed;
     public float m_fGlideTimer;
@@ -130,5 +133,14 @@ public class PlayerController : MonoBehaviour
     {
         m_hPUI.SetMaxHPBar(m_fFullHP);
         m_fNowHP = m_fFullHP;
+        for(int a=0; a<m_AllWeapon.Count; a++)
+        {
+            if (m_AllWeapon[a].m_fLevel>0)
+            {
+                m_AllWeapon[a].gameObject.SetActive(true);
+                m_AllWeapon[a].StartStage();
+                Debug.Log("플레이어에서 웨펀으로 넣는 입력");
+            }
+        }
     }
 }

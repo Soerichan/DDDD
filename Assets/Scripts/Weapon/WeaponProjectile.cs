@@ -4,5 +4,16 @@ using UnityEngine;
 
 public class WeaponProjectile : MonoBehaviour
 {
-    public float m_fProjectileSpeed;
+
+    public Vector3 m_direction;
+    public float m_fLevel;
+    public float m_fSpeed;
+    public float m_fHitRange;
+    public float m_fDamage;
+
+    protected float m_fLifeSpan = 10f;
+
+
+
+
 }

@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84dd96b52a86db345ba08a0359853690, type: 3}
   m_Name: WeaponData_Ice
   m_EditorClassIdentifier: 
+  m_name: Ice
+  m_described: slows down when hit
   m_fDefaultDamage: 10
   m_fDefaultCoolTime: 1
-  m_fDefaultRange: 20
-  m_fDefaultHitBoxRange: 3
-  m_fLevel: 0
+  m_fDefaultRange: 1000
+  m_fDefaultSearchRange: 1000
+  m_fProjectileSpeed: 20
+  m_fProjectileHitRange: 1000

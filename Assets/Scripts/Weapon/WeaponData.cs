@@ -21,13 +21,14 @@ public class WeaponData : ScriptableObject
     public float m_fDefaultRange;
 
     [SerializeField]
-    public float m_fDefaultHitBoxRange;
+    public float m_fDefaultSearchRange;
 
-    [SerializeField]
-    public float m_fLevel;
+ 
 
     [SerializeField]
     public float m_fProjectileSpeed;
+    [SerializeField]
+    public float m_fProjectileHitRange;
 
 
 }
