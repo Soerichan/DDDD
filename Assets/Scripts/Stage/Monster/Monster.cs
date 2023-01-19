@@ -10,7 +10,7 @@ public class Monster : MonoBehaviour
     [SerializeField]
     public float m_fHP;
     [SerializeField]
-    public float m_fExp;
+    public int m_iExp;
     [SerializeField]
     public float m_fAttackDamage;
     [SerializeField]
@@ -71,7 +71,7 @@ public class Monster : MonoBehaviour
         }
  
 
-        if(m_fHP<=0||m_stageManager.m_bIsGameOver==true)
+        if(m_fNowHP <= 0||m_stageManager.m_bIsGameOver==true)
         {
              Die();
           
@@ -119,6 +119,14 @@ public class Monster : MonoBehaviour
     {
         m_animator.SetTrigger("Die");
         m_poolmanager.Release(this.gameObject);
+
+        
+    }
+
+    protected void DropCookie()
+    {
+
+        CookieManager.Instance.DropCookie(m_iExp,transform.position);
     }
 
     protected IEnumerator AttackCorutine()
