@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class IceWeaponProjectile : WeaponProjectile
 {
+   
   
    public Monster m_target;
 
@@ -23,18 +24,40 @@ public class IceWeaponProjectile : WeaponProjectile
     private IEnumerator DestroyCoroutine()
     {
         yield return new WaitForSeconds(m_fLifeSpan);
-        Destroy(this);
+        Destroy(gameObject);
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        m_target = null;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, m_fHitRange);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            m_target = colliders[i].GetComponent<Monster>();
-            m_target.Damaged(m_fDamage * m_fLevel);
-            m_target.Slowed(m_fSlowPer * m_fLevel);
-        }
+        Debug.Log("¥Í¿Ω");
+        LayerMask mask = LayerMask.GetMask("Monster");
+
+       
+           
+            m_target = null;
+            Collider[] colliders = Physics.OverlapSphere(transform.position, m_fHitRange, mask);
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                Debug.Log("∆˜πÆø°±Ó¡¯ µÈæÓ∞¨¿Ω");
+                m_target = colliders[i].GetComponent<Monster>();
+
+                if (null != m_target)
+                {
+                    Debug.Log("≈∏∞Ÿ¿Ã ≥Œ¿Ã æ∆¥‘");
+                    m_target.Damaged(m_fDamage * m_fLevel);
+                    m_target.Slowed(m_fSlowPer * m_fLevel);
+                }
+            }
+            Destroy(gameObject);
+        
     }
+
+   
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, m_fHitRange);
+    }
+
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   m_described: slows down when hit
   m_fDefaultDamage: 10
   m_fDefaultCoolTime: 1
-  m_fDefaultRange: 1000
-  m_fDefaultSearchRange: 1000
+  m_fDefaultRange: 40
+  m_fDefaultSearchRange: 40
   m_fProjectileSpeed: 20
-  m_fProjectileHitRange: 1000
+  m_fProjectileHitRange: 15

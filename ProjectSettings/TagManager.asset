@@ -14,13 +14,13 @@ TagManager:
   - Water
   - UI
   - underUI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Monster
+  - MonsterMissile
+  - Player
+  - PlayerMissile
+  - StaticObject
+  - BreakableObject
+  - EatableObejcect
   - 
   - 
   - 

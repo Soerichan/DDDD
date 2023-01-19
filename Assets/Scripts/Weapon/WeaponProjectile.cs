@@ -11,7 +11,7 @@ public class WeaponProjectile : MonoBehaviour
     public float m_fHitRange;
     public float m_fDamage;
 
-    protected float m_fLifeSpan = 10f;
+    protected float m_fLifeSpan = 5f;
 
 
 
