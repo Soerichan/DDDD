@@ -52,14 +52,14 @@ public class PoolManager :MonoBehaviour
                 
                 stack.Push(instance);
             }
+
             PoolDic.Add(PoolPrefab[a].Prefab.name, stack);
         }
     }
 
     public GameObject Get(GameObject prefab)
     {
-        Stack<GameObject> stack =new Stack<GameObject>();
-            stack=PoolDic[prefab.name];
+        Stack<GameObject> stack =PoolDic[prefab.name];
         
 
         if(stack.Count>0)
@@ -76,14 +76,34 @@ public class PoolManager :MonoBehaviour
 
     }
 
+    public GameObject Get(string name)
+    {
+        Stack<GameObject> stackCookie = PoolDic[name];
+
+
+        if (stackCookie.Count > 0)
+        {
+            GameObject instanceCookie = stackCookie.Pop();
+            instanceCookie.gameObject.SetActive(true);
+            instanceCookie.transform.parent = null;
+            return instanceCookie;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public void Release(GameObject instance)
     {
-        Stack<GameObject> stack = new Stack<GameObject>();
-        stack= PoolDic[instance.name];
+        Stack<GameObject> stack = PoolDic[instance.name];
         instance.SetActive(false);
         PoolPrefab.Find(x=>name==x.Container.name);
         stack.Push(instance);
     }
+
+   
+
 
     [Serializable]
     struct PoolableObject

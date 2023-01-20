@@ -118,15 +118,19 @@ public class Monster : MonoBehaviour
     protected void Die()
     {
         m_animator.SetTrigger("Die");
+        DropCookie();
         m_poolmanager.Release(this.gameObject);
+        m_fNowHP = m_fHP;
+        m_fNowSpeed = m_fMoveSpeed;
 
-        
     }
 
     protected void DropCookie()
     {
 
+       
         CookieManager.Instance.DropCookie(m_iExp,transform.position);
+       
     }
 
     protected IEnumerator AttackCorutine()
@@ -156,4 +160,6 @@ public class Monster : MonoBehaviour
         yield return new WaitForSeconds(4f);
         m_fNowSpeed = m_fMoveSpeed;
     }
+
+    
 }

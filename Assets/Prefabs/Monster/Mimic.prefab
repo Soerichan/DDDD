@@ -80,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fMoveSpeed: 0
   m_fHP: 1000
-  m_fExp: 0
+  m_iExp: 1000
   m_fAttackDamage: 1
   m_fAttackCoolTime: 5
   m_fAttackRange: 1

@@ -10,23 +10,39 @@ public class CookieManager : Singleton<CookieManager>
     private int m_iCookieWallet;
 
     private PoolManager m_poolManager;
+    public CookieUI m_cookieUI;
 
-    Vector3 m_pos01 = new Vector3(-1, 1, 0);
-    Vector3 m_pos02 = new Vector3(-0, 1, 0);
-    Vector3 m_pos03 = new Vector3(+1, 1, 0);
-    Vector3 m_pos04 = new Vector3(0, 1, -1);
-    Vector3 m_pos05 = new Vector3(0, 1, 0);
-    Vector3 m_pos06 = new Vector3(0, 1, 1);
-    Vector3 m_pos07 = new Vector3(-1, 1, 0);
-    Vector3 m_pos08 = new Vector3(-1, 1, 0);
-    Vector3 m_pos09 = new Vector3(-1, 1, 0);
-    Vector3 m_pos010 = new Vector3(-1, 1, 0);
-    Vector3 m_pos011 = new Vector3(-1, 1, 0);
-    Vector3 m_pos012 = new Vector3(-1, 1, 0);
-    private void Start()
+    private Vector3[] m_ArrayCookiePosOffset=new Vector3[31];
+
+    private void Awake()
     {
         m_iCookieWallet = 0;
         m_poolManager = GameObject.Find("PoolManager").GetComponent<PoolManager>();
+       // m_cookieUI = GameObject.Find("CookieUI").GetComponent<CookieUI>();
+
+        for (int a = 1; a < 31; a += 6)
+        {
+            m_ArrayCookiePosOffset[a] = new Vector3(0, 1, 1 * a);
+            m_ArrayCookiePosOffset[a + 1] = new Vector3(-0.87f * a, 1, -0.5f * a);
+            m_ArrayCookiePosOffset[a + 2] = new Vector3(-0.87f * a, 1, -0.5f * a);
+
+            m_ArrayCookiePosOffset[a + 3] = new Vector3(0, 1, -1 * a);
+            m_ArrayCookiePosOffset[a + 4] = new Vector3(0.5f * a, 1, -0.87f * a);
+            m_ArrayCookiePosOffset[a + 5] = new Vector3(0.5f * a, 1, 0.87f * a);
+
+
+        }
+    }
+
+    private void Start()
+    {
+       
+    }
+
+    public void WakeUp()
+    {
+        int hello = 0;
+        hello += 1;
     }
 
     public void DropCookie(int exp,Vector3 pos)
@@ -36,6 +52,11 @@ public class CookieManager : Singleton<CookieManager>
         int cookie_25=0;
         int cookie_5=0;
         int cookie_1=0;
+
+        Vector3[] dropPos = new Vector3[30];
+        
+
+        int cookieCount = 1;
 
         while(exp>=625)
         {
@@ -63,31 +84,59 @@ public class CookieManager : Singleton<CookieManager>
             exp -= 1;
         }
 
+       
+           for (int i = 0; i < cookie_625; i++)
+           {
+            GameObject instanceCookie = m_poolManager.Get("Cookie_625");
 
-        for(int i= cookie_625; i!=0 ;i--)
-        {
-           
-        }
-        for (int i = cookie_125; i != 0; i--)
-        {
+            dropPos[cookieCount] = pos + m_ArrayCookiePosOffset[cookieCount];
+            instanceCookie.transform.position = dropPos[cookieCount];
+            instanceCookie.transform.rotation = Quaternion.identity;
+            cookieCount++;
+           }
 
-        }
-        for (int i = cookie_25; i != 0; i--)
-        {
+           for (int i = 0; i < cookie_125; i++)
+           {
+            GameObject instanceCookie = m_poolManager.Get("Cookie_125");
 
-        }
-        for (int i = cookie_5; i != 0; i--)
-        {
+            dropPos[cookieCount] = pos + m_ArrayCookiePosOffset[cookieCount];
+            instanceCookie.transform.position = dropPos[cookieCount];
+            instanceCookie.transform.rotation = Quaternion.identity;
+            cookieCount++;
+           }
 
-        }
-        for (int i = cookie_1; i != 0; i--)
-        {
+           for (int i = 0; i < cookie_25; i++)
+           {
+            GameObject instanceCookie = m_poolManager.Get("Cookie_25");
 
-        }
-        GameObject instance = m_poolManager.Get(cookiePrefabs[0]);
-     
-        instance.transform.position = pos;
-        instance.transform.rotation = Quaternion.identity;
+            dropPos[cookieCount] = pos + m_ArrayCookiePosOffset[cookieCount];
+            instanceCookie.transform.position = dropPos[cookieCount];
+            instanceCookie.transform.rotation = Quaternion.identity;
+            cookieCount++;
+           }
+
+           for (int i = 0; i < cookie_5; i++)
+           {
+            GameObject instanceCookie = m_poolManager.Get("Cookie_5");
+
+            dropPos[cookieCount] = pos + m_ArrayCookiePosOffset[cookieCount];
+            instanceCookie.transform.position = dropPos[cookieCount];
+            instanceCookie.transform.rotation = Quaternion.identity;
+            cookieCount++;
+           }
+
+           for (int i = 0; i < cookie_1; i++)
+           {
+            GameObject instanceCookie = m_poolManager.Get("Cookie_1");
+
+            dropPos[cookieCount] = pos + m_ArrayCookiePosOffset[cookieCount];
+            instanceCookie.transform.position = dropPos[cookieCount];
+            instanceCookie.transform.rotation = Quaternion.identity;
+            cookieCount++;
+           }
+        
+
+       
     }
 
     public void EatCookie(GameObject cookie, int exp)
@@ -100,13 +149,19 @@ public class CookieManager : Singleton<CookieManager>
     public void PlusCookie(int cookie)
     {
         m_iCookieWallet += cookie;
+        m_cookieUI.SetCookie(m_iCookieWallet);
     }
 
     public void MinusCookie(int cookie)
     {
         m_iCookieWallet -= cookie;
+        m_cookieUI.SetCookie(m_iCookieWallet);
     }
 
-   
+    public void ClearCookie(GameObject cookie)
+    {
+        m_poolManager.Release(cookie);
+    }
+
 
 }

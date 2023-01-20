@@ -423,7 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_fMoveSpeed: 6
   m_fHP: 40
-  m_fExp: 30
+  m_iExp: 8
   m_fAttackDamage: 10
   m_fAttackCoolTime: 4
   m_fAttackRange: 6

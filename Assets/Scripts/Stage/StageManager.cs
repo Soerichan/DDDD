@@ -19,6 +19,8 @@ public class StageManager : Singleton<StageManager>
     private HPUI m_hpUI;
     [SerializeField]
     private TimerUI m_timerUI;
+    [SerializeField]
+    private CookieUI m_cookieUI;
 
    
     public PlayerController m_player;
@@ -31,16 +33,16 @@ public class StageManager : Singleton<StageManager>
     {
 
         m_player = GameObject.Find("Player").GetComponent<PlayerController>();
+        CookieManager.Instance.WakeUp();
     }
 
     private void Start()
     {
        
-        //tageStart();
-        //StageTimeCheck();
+      
 
     }
-    // Update is called once per frame
+  
     void Update()
     {
        if(m_player.m_fNowHP<=0)
@@ -59,6 +61,7 @@ public class StageManager : Singleton<StageManager>
         m_hpUI.gameObject.SetActive(true);
         m_timerUI.gameObject.SetActive(true);
         m_timerUI.StageStart();
+        m_cookieUI.gameObject.SetActive(true);
 
         m_player.StartStage();
         
@@ -117,7 +120,7 @@ public class StageManager : Singleton<StageManager>
                instance.transform.rotation = Quaternion.identity;
            }
 
-           yield return new WaitForSeconds(1);
+           yield return new WaitForSeconds(2);
        }
 
     }
@@ -133,7 +136,7 @@ public class StageManager : Singleton<StageManager>
             instance.transform.rotation = Quaternion.identity;
 
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(3);
         }
 
     }
@@ -150,7 +153,7 @@ public class StageManager : Singleton<StageManager>
                 instance.transform.rotation = Quaternion.identity;
             }
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
         }
 
     }
@@ -167,7 +170,7 @@ public class StageManager : Singleton<StageManager>
             instance.transform.rotation = Quaternion.identity;
 
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(3);
         }
 
     }
@@ -184,7 +187,7 @@ public class StageManager : Singleton<StageManager>
                 instance.transform.rotation = Quaternion.identity;
             }
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
         }
 
     }
@@ -240,7 +243,7 @@ public class StageManager : Singleton<StageManager>
 
 
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
         }
 
     }
@@ -303,6 +306,7 @@ public class StageManager : Singleton<StageManager>
         m_hpUI.gameObject.SetActive(false);
         m_timerUI.StageEnd();
         m_timerUI.gameObject.SetActive(false);
+        m_cookieUI.gameObject.SetActive(false);
         GameProceedUI.SetActive(true);
 
     }
@@ -315,6 +319,7 @@ public class StageManager : Singleton<StageManager>
         m_hpUI.gameObject.SetActive(false);
         m_timerUI.StageEnd();
         m_timerUI.gameObject.SetActive(false);
+        m_cookieUI.gameObject.SetActive(false);
         GameOverUI.SetActive(true);
     }
 }

@@ -52,7 +52,7 @@ public class IceWeapon : Weapon
 
     public void EndStage()
     {
-        StopCoroutine(WeaponCoroutine());
+        StopAllCoroutines();
        
     }
 
