@@ -163,5 +163,8 @@ public class CookieManager : Singleton<CookieManager>
         m_poolManager.Release(cookie);
     }
 
-
+    public int GetHowManyCookie()
+    {
+        return m_iCookieWallet;
+    }
 }

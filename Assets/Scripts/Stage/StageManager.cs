@@ -21,7 +21,8 @@ public class StageManager : Singleton<StageManager>
     private TimerUI m_timerUI;
     [SerializeField]
     private CookieUI m_cookieUI;
-
+    [SerializeField]
+    private int m_iTime;
    
     public PlayerController m_player;
     public float m_playerNowHP;
@@ -289,7 +290,7 @@ public class StageManager : Singleton<StageManager>
 
     private IEnumerator TimeChecker()
     {
-        yield return new WaitForSeconds(90);
+        yield return new WaitForSeconds(m_iTime);
         StageEndToNext();
         
     }

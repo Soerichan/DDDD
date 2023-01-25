@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84dd96b52a86db345ba08a0359853690, type: 3}
   m_Name: WeaponData_Ice
   m_EditorClassIdentifier: 
-  m_name: Ice
-  m_described: slows down when hit
+  m_name: IceMissile
+  m_image: {fileID: 21300000, guid: 2bccd332882fcd14b9e4c377e432c587, type: 3}
+  m_described: Middel Damage, Slow
+  m_iDefaultCost: 100
   m_fDefaultDamage: 10
   m_fDefaultCoolTime: 1
   m_fDefaultRange: 40
