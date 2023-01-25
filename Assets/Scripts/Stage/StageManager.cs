@@ -307,7 +307,8 @@ public class StageManager : Singleton<StageManager>
         m_hpUI.gameObject.SetActive(false);
         m_timerUI.StageEnd();
         m_timerUI.gameObject.SetActive(false);
-        m_cookieUI.gameObject.SetActive(false);
+       // m_cookieUI.gameObject.SetActive(false);
+        m_player.EndStage();
         GameProceedUI.SetActive(true);
 
     }
@@ -321,6 +322,7 @@ public class StageManager : Singleton<StageManager>
         m_timerUI.StageEnd();
         m_timerUI.gameObject.SetActive(false);
         m_cookieUI.gameObject.SetActive(false);
+        m_player.EndStage();
         GameOverUI.SetActive(true);
     }
 }

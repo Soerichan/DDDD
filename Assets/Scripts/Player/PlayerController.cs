@@ -133,14 +133,24 @@ public class PlayerController : MonoBehaviour
     {
         m_hPUI.SetMaxHPBar(m_fFullHP);
         m_fNowHP = m_fFullHP;
-        for(int a=0; a<m_AllWeapon.Count; a++)
+        for (int a = 0; a < m_AllWeapon.Count; a++)
         {
-            if (m_AllWeapon[a].m_fLevel>0)
-            {
-                m_AllWeapon[a].gameObject.SetActive(true);
-                m_AllWeapon[a].StartStage();
-                Debug.Log("플레이어에서 웨펀으로 넣는 입력");
-            }
+            
+            m_AllWeapon[a].StartStage();
+            
+               
+            
+        }
+    }
+
+    public void EndStage()
+    {
+        for (int a = 0; a < m_AllWeapon.Count; a++)
+        {
+
+            m_AllWeapon[a].EndStage();
+
+
         }
     }
 }

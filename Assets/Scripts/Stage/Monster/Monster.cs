@@ -48,6 +48,7 @@ public class Monster : MonoBehaviour
    
 
     protected Vector3 ToPlayerDir;
+    protected Vector3 ToKnockBack;
 
     protected virtual void Start()
     {
@@ -109,7 +110,7 @@ public class Monster : MonoBehaviour
             m_bIsAttack = true;
             m_animator.SetTrigger("Attack");
             m_stageManager.m_player.Damaged(m_fAttackDamage);
-            StartCoroutine(AttackCorutine());
+            Coroutine co1= StartCoroutine(AttackCorutine());
         }
 
 
@@ -152,7 +153,7 @@ public class Monster : MonoBehaviour
     public void Slowed(float SlowPer)
     {
         m_fNowSpeed = m_fNowSpeed * SlowPer;
-        StartCoroutine(SlowIsEnd());
+        Coroutine co2=StartCoroutine(SlowIsEnd());
     }
 
     private IEnumerator SlowIsEnd()
@@ -161,5 +162,24 @@ public class Monster : MonoBehaviour
         m_fNowSpeed = m_fMoveSpeed;
     }
 
-    
+    public void KnockBacked(float knockback,Vector3 pos)
+    {
+        Coroutine co3 = StartCoroutine(KnockBacking(knockback, pos));
+        Coroutine co4 = StartCoroutine(KnockBackEnd());
+    }
+
+    private IEnumerator KnockBacking(float knockback, Vector3 pos)
+    {
+        while(true)
+        {
+            ToKnockBack = (m_stageManager.PlayerPosition - transform.position).normalized;
+            transform.forward = ToKnockBack;
+            transform.Translate(-knockback * ToKnockBack * m_fNowSpeed * Time.deltaTime, Space.World);
+        }
+        yield return new WaitForSeconds(1f);
+    }
+    private IEnumerator KnockBackEnd()
+    {
+        yield return new WaitForSeconds(0.5f);
+    }
 }

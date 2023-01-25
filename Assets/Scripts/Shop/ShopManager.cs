@@ -21,6 +21,7 @@ public class ShopManager : MonoBehaviour
 
     public void Buy(WeaponData weaponData)
     {
+        Debug.Log("πŸ¿Ã");
         m_inventory.Add(weaponData);
         CookieManager.Instance.MinusCookie(weaponData.m_iDefaultCost);
     }

@@ -28,7 +28,7 @@ public class IceWeaponProjectile : WeaponProjectile
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("¥Í¿Ω");
+       
         LayerMask mask = LayerMask.GetMask("Monster");
 
        
@@ -38,12 +38,12 @@ public class IceWeaponProjectile : WeaponProjectile
 
             for (int i = 0; i < colliders.Length; i++)
             {
-                Debug.Log("∆˜πÆø°±Ó¡¯ µÈæÓ∞¨¿Ω");
+               
                 m_target = colliders[i].GetComponent<Monster>();
 
                 if (null != m_target)
                 {
-                    Debug.Log("≈∏∞Ÿ¿Ã ≥Œ¿Ã æ∆¥‘");
+                  
                     m_target.Damaged(m_fDamage * m_fLevel);
                     m_target.Slowed(m_fSlowPer * m_fLevel);
                 }

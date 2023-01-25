@@ -19758,15 +19758,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_weaponData: {fileID: 11400000, guid: a5fbb09df02535647aab88e2b2a0e251, type: 2}
   m_projectile: {fileID: 4366385788495828561, guid: 5fe558431ad39d446a9b39820054b242, type: 3}
+  m_fLevel: 0
   m_fDamage: 0
   m_fCoolTime: 0
   m_fRange: 0
   m_fHitBoxRange: 0
   m_fSpeed: 0
-  m_fLevel: 0
   m_fDamageIncreasePerLevel: 0
   m_target: {fileID: 0}
   m_targetDirection: {x: 0, y: 0, z: 0}
+  m_GFX: {fileID: 1580179713526715553}
 --- !u!1 &1580179712633553873
 GameObject:
   m_ObjectHideFlags: 0

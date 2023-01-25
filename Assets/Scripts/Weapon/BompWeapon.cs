@@ -2,25 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceWeapon : Weapon
+public class BompWeapon : Weapon
 {
-    
-
-
     public float m_fDamage;
 
-    
+
     public float m_fCoolTime;
 
-  
+
     public float m_fRange;
 
-  
+
     public float m_fHitBoxRange;
 
     public float m_fSpeed;
-   
-    
+
+
 
     public float m_fDamageIncreasePerLevel;
 
@@ -28,39 +25,38 @@ public class IceWeapon : Weapon
 
     public Vector3 m_targetDirection;
 
+
     [SerializeField]
     public GameObject m_GFX;
-
 
     //public WeaponProjectile m_projetcile;
 
     private void Start()
     {
-        m_fDamage        = m_weaponData.m_fDefaultDamage;   
-        m_fCoolTime      = m_weaponData.m_fDefaultCoolTime;
-        m_fRange         = m_weaponData.m_fDefaultRange;
-      
+        m_fDamage = m_weaponData.m_fDefaultDamage;
+        m_fCoolTime = m_weaponData.m_fDefaultCoolTime;
+        m_fRange = m_weaponData.m_fDefaultRange;
+
         //m_fHitBoxRange   = m_weaponData.m_fDefaultSearchRange;
-    
+
 
     }
     public override void StartStage()
     {
-        
-        if(m_fLevel>0)
+
+        if (m_fLevel > 0)
         {
             m_GFX.SetActive(true);
             StartCoroutine(WeaponCoroutine());
         }
-       
-        
+
 
     }
 
     public override void EndStage()
     {
         StopAllCoroutines();
-       
+
     }
 
     private IEnumerator WeaponCoroutine()
@@ -69,22 +65,22 @@ public class IceWeapon : Weapon
         {
             yield return new WaitForSeconds(m_fCoolTime);
             WeaponInvoke();
-            
+
         }
     }
 
-  
+
 
     private void WeaponInvoke()
     {
 
         //오버랩스피어 해서 제일 가까운쪽에 쏜다
         //날아간다
-        
+
 
         m_target = null;
         LayerMask mask = LayerMask.GetMask("Monster");
-        Collider[] colliders = Physics.OverlapSphere(transform.position, m_fRange,mask);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, m_fRange, mask);
 
         if (m_fLevel < 3)
         {
@@ -95,12 +91,12 @@ public class IceWeapon : Weapon
 
             if (null != m_target)
             {
-               
+
                 WeaponMechanism();
 
             }
         }
-        else if(m_fLevel >= 3&&m_fLevel<9)
+        else if (m_fLevel >= 3 && m_fLevel < 9)
         {
 
             for (int a = 0; a < 3; a++)
@@ -122,11 +118,11 @@ public class IceWeapon : Weapon
                 }
             }
 
-            
-          
+
+
 
         }
-        else if(m_fLevel >=6)
+        else if (m_fLevel >= 6)
         {
 
             for (int a = 0; a < 12; a++)
@@ -148,7 +144,6 @@ public class IceWeapon : Weapon
                 }
             }
 
-            
 
         }
 
@@ -159,23 +154,15 @@ public class IceWeapon : Weapon
     private void WeaponMechanism()
     {
         Vector3 offsetPosition = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
-        WeaponProjectile instance   = Instantiate(m_projectile, offsetPosition, Quaternion.identity);
-        m_targetDirection           = (m_target.transform.position - instance.transform.position).normalized;
+        WeaponProjectile instance = Instantiate(m_projectile, offsetPosition, Quaternion.identity);
+        m_targetDirection = (m_target.transform.position - instance.transform.position).normalized;
         m_targetDirection.y = 0;
-        instance.m_direction        = m_targetDirection;
-        instance.m_fLevel           = m_fLevel;
-        instance.m_fSpeed           = m_weaponData.m_fProjectileSpeed;
-        instance.m_fHitRange        = m_weaponData.m_fProjectileHitRange;
-        instance.m_fDamage          = m_weaponData.m_fDefaultDamage;
-        
+        instance.m_direction = m_targetDirection;
+        instance.m_fLevel = m_fLevel;
+        instance.m_fSpeed = m_weaponData.m_fProjectileSpeed;
+        instance.m_fHitRange = m_weaponData.m_fProjectileHitRange;
+        instance.m_fDamage = m_weaponData.m_fDefaultDamage;
+
 
     }
-
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, m_fRange);
-    }
-
 }

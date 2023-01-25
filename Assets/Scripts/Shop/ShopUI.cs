@@ -10,5 +10,6 @@ public class ShopUI : MonoBehaviour
     private void OnEnable()
     {
         m_shopManager.Rerole();
+        CookieManager.Instance.PlusCookie(10);
     }
 }

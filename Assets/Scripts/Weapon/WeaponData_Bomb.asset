@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84dd96b52a86db345ba08a0359853690, type: 3}
-  m_Name: WeaponData_Ice
+  m_Name: WeaponData_Bomb
   m_EditorClassIdentifier: 
-  m_name: IceMissile
-  m_image: {fileID: 21300000, guid: 2bccd332882fcd14b9e4c377e432c587, type: 3}
-  m_described: Freeze!
+  m_name: Bomb
+  m_image: {fileID: 21300000, guid: c890dd06d4a350946ab11e4778bf47d8, type: 3}
+  m_described: Kaboom!
   m_iDefaultCost: 5
   m_iCost: 0
-  m_fDefaultDamage: 10
-  m_fDefaultCoolTime: 2
+  m_fDefaultDamage: 25
+  m_fDefaultCoolTime: 5
   m_fDefaultRange: 30
   m_fDefaultSearchRange: 30
-  m_fProjectileSpeed: 20
-  m_fProjectileHitRange: 15
+  m_fProjectileSpeed: 15
+  m_fProjectileHitRange: 20

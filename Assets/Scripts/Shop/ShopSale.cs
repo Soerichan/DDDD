@@ -8,17 +8,17 @@ public class ShopSale : MonoBehaviour
 {
     [SerializeField]
     private ShopManager m_shopManager;
+    [SerializeField]
     private Button m_button;
     [SerializeField]
-    private UnityEngine.UI.Image[] m_icon;
+    private Image m_icon;
     private WeaponData m_weaponData;
+    [SerializeField]
     private TextMeshProUGUI[] m_text;
     // Start is called before the first frame update
     void Start()
     {
-        m_text= GetComponentsInChildren<TextMeshProUGUI>();
-        m_icon=GetComponentsInChildren<UnityEngine.UI.Image>();
-        m_button=GetComponentInChildren<Button>();
+      
     }
 
     public void SaleRerole()
@@ -33,20 +33,23 @@ public class ShopSale : MonoBehaviour
 
     public void SaleRefresh()
     {
-        //m_button.interactable = true;
-        //m_icon[2].sprite = m_weaponData.m_image;
+       
+        m_button.interactable = m_button.interactable ? true : true;
+        m_icon.sprite = m_weaponData.m_image;
         m_text[0].text = m_weaponData.m_described;
         m_text[1].text = m_weaponData.m_iDefaultCost.ToString();
     }
 
-    public void ClickToBuy(WeaponData m_weponData)
+    public void ClickToBuy()
     {
         if (CookieManager.Instance.GetHowManyCookie() < m_weaponData.m_iCost)
         {
+            Debug.Log("돈모자람");
             return;
         }
 
-        m_shopManager.Buy(m_weponData);
+        Debug.Log("클릭투바이");
+        m_shopManager.Buy(m_weaponData);
         m_button.interactable = false;
     }
 }
