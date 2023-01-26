@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombWeaponProjectile : WeaponProjectile
+public class BeepWeaponProjectile : WeaponProjectile
 {
     public Monster m_target;
 
-    private float m_fKnockBack = 1f;
+    private float m_fSlowPer = 0.7f;
 
 
     private void Start()
@@ -43,7 +43,7 @@ public class BombWeaponProjectile : WeaponProjectile
             {
 
                 m_target.Damaged(m_fDamage * m_fLevel);
-                m_target.KnockBacked(m_fKnockBack * m_fLevel);
+                m_target.KnockBacked( m_fLevel);
             }
         }
         Destroy(gameObject);

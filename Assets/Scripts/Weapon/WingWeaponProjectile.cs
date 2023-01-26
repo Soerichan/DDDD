@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombWeaponProjectile : WeaponProjectile
+public class WingWeaponProjectile :WeaponProjectile
 {
     public Monster m_target;
 
-    private float m_fKnockBack = 1f;
+    
 
 
     private void Start()
@@ -14,14 +14,11 @@ public class BombWeaponProjectile : WeaponProjectile
         StartCoroutine(DestroyCoroutine());
     }
 
-    private void Update()
-    {
-        transform.Translate(m_direction * m_fSpeed * Time.deltaTime, Space.World);
-    }
+ 
 
     private IEnumerator DestroyCoroutine()
     {
-        yield return new WaitForSeconds(m_fLifeSpan);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
     private void OnTriggerEnter(Collider other)
@@ -43,10 +40,11 @@ public class BombWeaponProjectile : WeaponProjectile
             {
 
                 m_target.Damaged(m_fDamage * m_fLevel);
-                m_target.KnockBacked(m_fKnockBack * m_fLevel);
+                
             }
         }
         Destroy(gameObject);
 
     }
+
 }

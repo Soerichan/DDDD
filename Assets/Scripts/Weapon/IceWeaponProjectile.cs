@@ -8,7 +8,7 @@ public class IceWeaponProjectile : WeaponProjectile
   
    public Monster m_target;
 
-   private float m_fSlowPer=0.1f;
+   private float m_fSlowPer=0.7f;
 
 
     private void Start()
@@ -45,7 +45,7 @@ public class IceWeaponProjectile : WeaponProjectile
                 {
                   
                     m_target.Damaged(m_fDamage * m_fLevel);
-                    m_target.Slowed(m_fSlowPer * m_fLevel);
+                    m_target.Slowed(m_fSlowPer -(0.1f*m_fLevel));
                 }
             }
             Destroy(gameObject);

@@ -17,8 +17,8 @@ MonoBehaviour:
   m_described: Charge!
   m_iDefaultCost: 5
   m_iCost: 0
-  m_fDefaultDamage: 10
-  m_fDefaultCoolTime: 10
+  m_fDefaultDamage: 100
+  m_fDefaultCoolTime: 0.1
   m_fDefaultRange: 10
   m_fDefaultSearchRange: 10
   m_fProjectileSpeed: 10

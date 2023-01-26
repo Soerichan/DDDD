@@ -18,8 +18,8 @@ MonoBehaviour:
   m_iDefaultCost: 5
   m_iCost: 0
   m_fDefaultDamage: 3
-  m_fDefaultCoolTime: 1
-  m_fDefaultRange: 25
-  m_fDefaultSearchRange: 25
-  m_fProjectileSpeed: 20
-  m_fProjectileHitRange: 5
+  m_fDefaultCoolTime: 0.5
+  m_fDefaultRange: 15
+  m_fDefaultSearchRange: 15
+  m_fProjectileSpeed: 30
+  m_fProjectileHitRange: 10

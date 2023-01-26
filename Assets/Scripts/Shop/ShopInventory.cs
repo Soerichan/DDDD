@@ -24,6 +24,7 @@ public class ShopInventory : MonoBehaviour
                 m_inventoryUnits[i].Add(weaponData);
                 AddSub(weaponData);
                 return;
+                
             }
            
         }

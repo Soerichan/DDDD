@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private float m_fMoveDefaultSpeed;
 
     [SerializeField]
-    private float m_fGlideDefaultSpeed;
+    public float m_fGlideDefaultSpeed;
 
     [SerializeField]
     private float m_fGlideDefaultTimer;
@@ -152,5 +152,10 @@ public class PlayerController : MonoBehaviour
 
 
         }
+    }
+
+    public void Heal(float hp)
+    {
+        m_fNowHP += hp;
     }
 }

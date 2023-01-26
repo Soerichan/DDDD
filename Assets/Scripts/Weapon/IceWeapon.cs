@@ -103,7 +103,7 @@ public class IceWeapon : Weapon
         else if(m_fLevel >= 3&&m_fLevel<9)
         {
 
-            for (int a = 0; a < 3; a++)
+            for (int a = 0; a < colliders.Length && a < 3; a++)
             {
 
                 if (colliders[a] != null)
@@ -129,7 +129,7 @@ public class IceWeapon : Weapon
         else if(m_fLevel >=6)
         {
 
-            for (int a = 0; a < 12; a++)
+            for (int a = 0; a < colliders.Length && a < 12; a++)
             {
                 if (colliders[a] != null)
                 {

@@ -50,6 +50,12 @@ public class Monster : MonoBehaviour
     protected Vector3 ToPlayerDir;
     protected Vector3 ToKnockBack;
 
+    protected bool m_bKnockBack=false;
+
+    protected Coroutine co1;
+    protected Coroutine co2;
+    protected Coroutine co3;
+    protected Coroutine co4;
     protected virtual void Start()
     {
         m_stageManager      = GameObject.Find("StageManager").GetComponent<StageManager>();
@@ -89,8 +95,16 @@ public class Monster : MonoBehaviour
 
             ToPlayerDir = (m_stageManager.PlayerPosition - transform.position).normalized;
             transform.forward = ToPlayerDir;
-            transform.Translate(ToPlayerDir * m_fNowSpeed * Time.deltaTime, Space.World);
-            m_animator.SetBool("Move", true);
+            if (m_bKnockBack==false)
+            {
+                transform.Translate(ToPlayerDir * m_fNowSpeed * Time.deltaTime, Space.World);
+            }
+            else
+            {
+                transform.Translate(-1*ToPlayerDir * m_fNowSpeed * Time.deltaTime, Space.World);
+            }
+                m_animator.SetBool("Move", true);
+            
 
 
       
@@ -110,7 +124,7 @@ public class Monster : MonoBehaviour
             m_bIsAttack = true;
             m_animator.SetTrigger("Attack");
             m_stageManager.m_player.Damaged(m_fAttackDamage);
-            Coroutine co1= StartCoroutine(AttackCorutine());
+            co1= StartCoroutine(AttackCorutine());
         }
 
 
@@ -153,33 +167,26 @@ public class Monster : MonoBehaviour
     public void Slowed(float SlowPer)
     {
         m_fNowSpeed = m_fNowSpeed * SlowPer;
-        Coroutine co2=StartCoroutine(SlowIsEnd());
+        co2=StartCoroutine(SlowIsEnd());
     }
 
     private IEnumerator SlowIsEnd()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(1f);
         m_fNowSpeed = m_fMoveSpeed;
     }
 
-    public void KnockBacked(float knockback,Vector3 pos)
+    public void KnockBacked(float knockback)
     {
-        Coroutine co3 = StartCoroutine(KnockBacking(knockback, pos));
-        Coroutine co4 = StartCoroutine(KnockBackEnd());
+        m_bKnockBack = true;
+        co4 = StartCoroutine(KnockBackEnd());
     }
 
-    private IEnumerator KnockBacking(float knockback, Vector3 pos)
-    {
-        while(true)
-        {
-            ToKnockBack = (m_stageManager.PlayerPosition - transform.position).normalized;
-            transform.forward = ToKnockBack;
-            transform.Translate(-knockback * ToKnockBack * m_fNowSpeed * Time.deltaTime, Space.World);
-        }
-        yield return new WaitForSeconds(1f);
-    }
+ 
     private IEnumerator KnockBackEnd()
     {
         yield return new WaitForSeconds(0.5f);
+        m_bKnockBack = false;
+        StopCoroutine(co4);
     }
 }
