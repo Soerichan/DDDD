@@ -3930,7 +3930,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dc583abdcdda24141ae2fecf58c6fa34, type: 2}
+  - {fileID: 2100000, guid: c170229619aa6bf44aa39944387cb09e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7543,6 +7543,15 @@ MonoBehaviour:
   m_timerUI: {fileID: 914138408}
   m_cookieUI: {fileID: 1649470482}
   m_iTime: 10
+  m_plane: {fileID: 674241014}
+  m_materials:
+  - {fileID: 2100000, guid: a184a269b9840f34298c1ef45dbd457a, type: 2}
+  - {fileID: 2100000, guid: 26a3cc8bcfa095c40a5d5964a0940704, type: 2}
+  - {fileID: 2100000, guid: fcbc4e9d3a07b5141834cf89887de452, type: 2}
+  - {fileID: 2100000, guid: 294eaaa4ff236444e8b9bca514a2e911, type: 2}
+  - {fileID: 2100000, guid: eb9f7835b2333cc41a8bfd9dee227892, type: 2}
+  - {fileID: 2100000, guid: 35e987e10360ea849bd126c52f9af97b, type: 2}
+  - {fileID: 2100000, guid: 7b5767d9f7ab5b146af76f0aff74e06d, type: 2}
   m_player: {fileID: 1990848689}
   m_playerNowHP: 0
   PlayerPosition: {x: 0, y: 0, z: 0}

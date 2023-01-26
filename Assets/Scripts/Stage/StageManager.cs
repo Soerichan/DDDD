@@ -23,12 +23,19 @@ public class StageManager : Singleton<StageManager>
     private CookieUI m_cookieUI;
     [SerializeField]
     private int m_iTime;
-   
+    [SerializeField]
+    private GameObject m_plane;
+    private Renderer m_renderer;
+    [SerializeField]
+    private Material[] m_materials;
+
     public PlayerController m_player;
     public float m_playerNowHP;
     public Vector3 PlayerPosition;
 
     public bool m_bIsGameOver;
+
+
 
     private void Awake()
     {
@@ -65,8 +72,9 @@ public class StageManager : Singleton<StageManager>
         m_cookieUI.gameObject.SetActive(true);
 
         m_player.StartStage();
-        
-        
+
+        int mat = Random.Range(0, 8);
+        m_plane.gameObject.GetComponent<MeshRenderer>().material= m_materials[mat];
 
         switch (MapManager.NowRoom)
         {
